@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración Total | CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0b0f19; color: #f3f4f6; font-family: 'Plus Jakarta Sans', sans-serif; padding: 2rem; margin: 0; }
+        .container { max-width: 850px; margin: 0 auto; background: #111827; padding: 2.5rem; border-radius: 12px; border: 1px solid #1f2937; }
+        h1 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #fff; border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem; }
+        h2 { color: #60a5fa; font-size: 1.3rem; margin-top: 2rem; border-bottom: 1px dashed #1f2937; padding-bottom: 0.25rem; }
+        h3 { color: #9ca3af; font-size: 1rem; margin-bottom: 0.5rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #9ca3af; }
+        input, textarea { width: 100%; padding: 0.75rem; background: #1f2937; border: 1px solid #374151; border-radius: 6px; color: #fff; font-family: inherit; box-sizing: border-box; }
+        textarea { resize: vertical; height: 100px; }
+        input:focus, textarea:focus { outline: 1px solid #3b82f6; border-color: #3b82f6; }
+        .btn-save { background: #3b82f6; color: white; border: none; padding: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 2rem; transition: background 0.3s; }
+        .btn-save:hover { background: #2563eb; }
+        .alert { padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; color: #10b981; border-radius: 6px; margin-bottom: 1.5rem; display: none; text-align: center; font-weight: 600; }
+        .help-text { font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Panel de Control de Contenido Total</h1>
+    <div class="alert" id="success-alert">¡Currículum completo actualizado! Abre o recarga tu index.html para ver los cambios.</div>
+    
+    <form id="admin-form">
+        <h2>1. Información de Contacto y Cabecera</h2>
+        <div class="grid-2">
+            <div class="form-group"><label>Número de Colegiado</label><input type="text" id="cfg-colegiado"></div>
+            <div class="form-group"><label>Teléfono</label><input type="text" id="cfg-telefono"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Correo Electrónico</label><input type="email" id="cfg-correo"></div>
+            <div class="form-group"><label>Ubicación</label><input type="text" id="cfg-ubicacion"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Enlace de LinkedIn</label><input type="url" id="cfg-linkedin"></div>
+            <div class="form-group"><label>Enlace de Credly</label><input type="url" id="cfg-credly"></div>
+        </div>
+        <div class="form-group"><label>Ruta de la Foto de Perfil</label><input type="text" id="cfg-foto"></div>
+
+        <h2>2. Perfil Profesional</h2>
+        <div class="form-group">
+            <label>Descripción de Perfil (Español)</label>
+            <textarea id="cfg-perfil-es"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Descripción de Perfil (Inglés)</label>
+            <textarea id="cfg-perfil-en"></textarea>
+        </div>
+
+        <h2>3. Competencias Técnicas</h2>
+        <p style="font-size: 0.8rem; color: var(--text-secondary);">Separa las tecnologías usando comas (,)</p>
+        
+        <h3>Bloque 1: Cloud & Virtualización</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Título (ES / EN)</label><input type="text" id="cfg-sk1-t-es" value="Computación en la Nube"><input type="text" id="cfg-sk1-t-en" value="Cloud Computing" style="margin-top:4px;"></div>
+            <div class="form-group"><label>Tecnologías</label><textarea id="cfg-sk1-tags" style="height:64px;"></textarea></div>
+        </div>
+
+        <h3>Bloque 2: Ciberseguridad & Redes</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Título (ES / EN)</label><input type="text" id="cfg-sk2-t-es" value="Ciberseguridad y Redes"><input type="text" id="cfg-sk2-t-en" value="Cybersecurity & Networking" style="margin-top:4px;"></div>
+            <div class="form-group"><label>Tecnologías</label><textarea id="cfg-sk2-tags" style="height:64px;"></textarea></div>
+        </div>
+
+        <h3>Bloque 3: Infraestructura & Servidores</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Título (ES / EN)</label><input type="text" id="cfg-sk3-t-es" value="Infraestructura y Servidores"><input type="text" id="cfg-sk3-t-en" value="Infrastructure & Servers" style="margin-top:4px;"></div>
+            <div class="form-group"><label>Tecnologías</label><textarea id="cfg-sk3-tags" style="height:64px;"></textarea></div>
+        </div>
+
+        <h3>Bloque 4: Automatización & DevOps</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Título (ES / EN)</label><input type="text" id="cfg-sk4-t-es" value="Automatización y DevOps"><input type="text" id="cfg-sk4-t-en" value="Automation & DevOps" style="margin-top:4px;"></div>
+            <div class="form-group"><label>Tecnologías</label><textarea id="cfg-sk4-tags" style="height:64px;"></textarea></div>
+        </div>
+
+        <h2>4. Experiencia Profesional (Últimos 3 Cargos)</h2>
+        
+        <h3>Puesto 1 (Más Reciente)</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Empresa y Detalles</label><input type="text" id="cfg-exp1-comp"></div>
+            <div class="form-group"><label>Período (ej: 2013 - Actualidad)</label><input type="text" id="cfg-exp1-date-es"><input type="text" id="cfg-exp1-date-en" style="margin-top:4px;"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Cargo (Español)</label><input type="text" id="cfg-exp1-title-es"></div>
+            <div class="form-group"><label>Cargo (Inglés)</label><input type="text" id="cfg-exp1-title-en"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Logros / Funciones (Español - Un renglón por viñeta)</label><textarea id="cfg-exp1-bullets-es"></textarea></div>
+            <div class="form-group"><label>Logros / Funciones (Inglés - Un renglón por viñeta)</label><textarea id="cfg-exp1-bullets-en"></textarea></div>
+        </div>
+
+        <h3>Puesto 2</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Empresa y Detalles</label><input type="text" id="cfg-exp2-comp"></div>
+            <div class="form-group"><label>Período</label><input type="text" id="cfg-exp2-date-es"><input type="text" id="cfg-exp2-date-en" style="margin-top:4px;"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Cargo (Español)</label><input type="text" id="cfg-exp2-title-es"></div>
+            <div class="form-group"><label>Cargo (Inglés)</label><input type="text" id="cfg-exp2-title-en"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Logros (Español)</label><textarea id="cfg-exp2-bullets-es"></textarea></div>
+            <div class="form-group"><label>Logros (Inglés)</label><textarea id="cfg-exp2-bullets-en"></textarea></div>
+        </div>
+
+        <h3>Puesto 3</h3>
+        <div class="grid-2">
+            <div class="form-group"><label>Empresa y Detalles</label><input type="text" id="cfg-exp3-comp"></div>
+            <div class="form-group"><label>Período</label><input type="text" id="cfg-exp3-date-es"><input type="text" id="cfg-exp3-date-en" style="margin-top:4px;"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Cargo (Español)</label><input type="text" id="cfg-exp3-title-es"></div>
+            <div class="form-group"><label>Cargo (Inglés)</label><input type="text" id="cfg-exp3-title-en"></div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group"><label>Logros (Español)</label><textarea id="cfg-exp3-bullets-es"></textarea></div>
+            <div class="form-group"><label>Logros (Inglés)</label><textarea id="cfg-exp3-bullets-en"></textarea></div>
+        </div>
+
+        <button type="submit" class="btn-save">Guardar Toda la Información</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Objeto maestro con absolutamente todo el contenido por defecto del currículum
+        const defaultMasterData = {
+            colegiado: "36479",
+            telefono: "(502) 5694-2222",
+            correo: "vmef1980@gmail.com",
+            ubicacion: "Guatemala City, Guatemala",
+            linkedin: "https://www.linkedin.com/in/estradafunes/",
+            credly: "https://www.credly.com/users/victor-estrada.2114d8cf",
+            fotoURL: "img/perfil.jpg",
+            perfilES: "Profesional y Líder Técnico con más de 25 años de trayectoria sólida en la administración de infraestructura tecnológica crítica, gestión de centros de datos, continuidad operativa y automatización de procesos en entornos bancarios y corporativos multinacionales. Especialista en diseñar e implementar soluciones de alta disponibilidad, migraciones complejas, planes de recuperación ante desastres (DRP) y optimización de costos bajo una visión altamente estratégica alineada al negocio.",
+            perfilEN: "Highly accomplished Technical Leader and Senior Engineer with over 25 years of experience driving critical IT infrastructure management, data center operations, business continuity, and process automation across multinational corporate and banking environments. Expert in high-availability architecture deployment, complex system migrations, Disaster Recovery Planning (DRP), and cost optimization with a strategic vision tightly aligned with enterprise business goals.",
+            skills: [
+                { tES: "Computación en la Nube", tEN: "Cloud Computing", tags: "Microsoft Azure (IaaS, PaaS), Azure Virtual Machines, Azure Resource Manager (ARM), Migraciones Cloud, Virtualización Empresarial (VMware vSphere, Hyper-V)." },
+                { tES: "Ciberseguridad y Redes", tEN: "Cybersecurity & Networking", tags: "Seguridad Perimetral, Cisco PIX/ASA, SonicWall, Firewalls de Próxima Generación (NGFW), VPNs Avanzadas, F5 BIG-IP, Fortimail, Enrutamiento y Conmutación Corporativa (Cisco R&S)." },
+                { tES: "Infraestructura y Servidores", tEN: "Infrastructure & Servers", tags: "Servidores de Misión Crítica (HP/COMPAQ Blade, DELL PowerEdge), Windows Server, Active Directory Empresarial, Microsoft Exchange, Unix, Ubuntu, Almacenamiento NAS/SAN (HP EVA, EMC2, Dell EqualLogic), HP Data Protector." },
+                { tES: "Automatización y DevOps", tEN: "Automation & DevOps", tags: "Scripting Avanzado en PowerShell, Automatización de Procesos (Excel VBA), Infraestructura como Código (IaC), Programación de Sistemas Físicos (G-code)." }
+            ],
+            experiencia: [
+                {
+                    comp: "Conduent Guatemala (Antes Xerox)", dES: "2013 - Actualidad", dEN: "2013 - Present",
+                    tES: "Ingeniero Sénior de Infraestructura", tEN: "Senior Infrastructure Engineer",
+                    bES: "Administración integral y soporte global de centros de datos locales y remotos, asegurando continuidad operativa en entornos críticos.\nLiderazgo de proyectos globales de infraestructura, migraciones de sistemas complejos y esquemas de seguridad informática.\nAutomatización de procesos operativos manteniendo alta estabilidad ante múltiples transiciones corporativas.",
+                    bEN: "Direct full-scale management and global support of local and remote data centers, securing 24/7 high availability.\nLead high-impact infrastructure initiatives, system migrations, and enterprise data protection compliance.\nSpearhead core automation scripts maintaining absolute stability across corporate structural shifts."
+                },
+                {
+                    comp: "Banco G&T Continental — El Salvador", dES: "2011 - 2013", dEN: "2011 - 2013",
+                    tES: "Director de Administración de Sistemas de Información", tEN: "Director of Information Systems Administration",
+                    bES: "Gestión integral de centros de datos principales y de contingencia para el resguardo de la continuidad bancaria.\nTraslado físico exitoso del centro de datos principal con cero interrupciones en servicios críticos del negocio.\nDiseño de políticas de modernización tecnológica e implementación de soluciones redundantes de alta disponibilidad.",
+                    bEN: "Managed the end-to-end core and contingency data center architectures to safeguard operational banking services.\nOrchestrated the physical relocation of the core data center with zero downtime on mission-critical systems.\nDesigned modern hardware replacement policies and deployed high-availability infrastructure networks."
+                },
+                {
+                    comp: "Banco G&T Continental — Guatemala", dES: "2007 - 2011", dEN: "2007 - 2011",
+                    tES: "Coordinador de Administración de TI", tEN: "IT Administration Coordinator",
+                    bES: "Coordinación de infraestructura crítica, liderando equipos en mantenimiento preventivo, monitoreo y soporte de nivel corporativo.\nElaboración y ejecución de presupuestos de inversión alineados a planes de contingencia ante desastres (DRP).",
+                    bEN: "Coordinated core data center architecture, managing technical teams in preventive maintenance and system monitoring.\nFormulated IT financial budgets strictly aligned with comprehensive corporate Disaster Recovery Plans."
+                }
+            ]
+        };
+
+        let masterData = JSON.parse(localStorage.getItem('cv_master_data')) || defaultMasterData;
+
+        // Cargar datos en los inputs correspondientes
+        document.getElementById('cfg-colegiado').value = masterData.colegiado;
+        document.getElementById('cfg-telefono').value = masterData.telefono;
+        document.getElementById('cfg-correo').value = masterData.correo;
+        document.getElementById('cfg-ubicacion').value = masterData.ubicacion;
+        document.getElementById('cfg-linkedin').value = masterData.linkedin;
+        document.getElementById('cfg-credly').value = masterData.credly;
+        document.getElementById('cfg-foto').value = masterData.fotoURL;
+        document.getElementById('cfg-perfil-es').value = masterData.perfilES;
+        document.getElementById('cfg-perfil-en').value = masterData.perfilEN;
+
+        // Habilidades
+        document.getElementById('cfg-sk1-t-es').value = masterData.skills[0].tES; document.getElementById('cfg-sk1-t-en').value = masterData.skills[0].tEN; document.getElementById('cfg-sk1-tags').value = masterData.skills[0].tags;
+        document.getElementById('cfg-sk2-t-es').value = masterData.skills[1].tES; document.getElementById('cfg-sk2-t-en').value = masterData.skills[1].tEN; document.getElementById('cfg-sk2-tags').value = masterData.skills[1].tags;
+        document.getElementById('cfg-sk3-t-es').value = masterData.skills[2].tES; document.getElementById('cfg-sk3-t-en').value = masterData.skills[2].tEN; document.getElementById('cfg-sk3-tags').value = masterData.skills[2].tags;
+        document.getElementById('cfg-sk4-t-es').value = masterData.skills[3].tES; document.getElementById('cfg-sk4-t-en').value = masterData.skills[3].tEN; document.getElementById('cfg-sk4-tags').value = masterData.skills[3].tags;
+
+        // Experiencia
+        for(let i=1; i<=3; i++) {
+            let dataExp = masterData.experiencia[i-1];
+            document.getElementById(`cfg-exp${i}-comp`).value = dataExp.comp;
+            document.getElementById(`cfg-exp${i}-date-es`).value = dataExp.dES;
+            document.getElementById(`cfg-exp${i}-date-en`).value = dataExp.dEN;
+            document.getElementById(`cfg-exp${i}-title-es`).value = dataExp.tES;
+            document.getElementById(`cfg-exp${i}-title-en`).value = dataExp.tEN;
+            document.getElementById(`cfg-exp${i}-bullets-es`).value = dataExp.bES;
+            document.getElementById(`cfg-exp${i}-bullets-en`).value = dataExp.bEN;
+        }
+
+        // Evento Guardar
+        document.getElementById('admin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nuevaDataMaster = {
+                colegiado: document.getElementById('cfg-colegiado').value,
+                telefono: document.getElementById('cfg-telefono').value,
+                correo: document.getElementById('cfg-correo').value,
+                ubicacion: document.getElementById('cfg-ubicacion').value,
+                linkedin: document.getElementById('cfg-linkedin').value,
+                credly: document.getElementById('cfg-credly').value,
+                fotoURL: document.getElementById('cfg-foto').value,
+                perfilES: document.getElementById('cfg-perfil-es').value,
+                perfilEN: document.getElementById('cfg-perfil-en').value,
+                skills: [
+                    { tES: document.getElementById('cfg-sk1-t-es').value, tEN: document.getElementById('cfg-sk1-t-en').value, tags: document.getElementById('cfg-sk1-tags').value },
+                    { tES: document.getElementById('cfg-sk2-t-es').value, tEN: document.getElementById('cfg-sk2-t-en').value, tags: document.getElementById('cfg-sk2-tags').value },
+                    { tES: document.getElementById('cfg-sk3-t-es').value, tEN: document.getElementById('cfg-sk3-t-en').value, tags: document.getElementById('cfg-sk3-tags').value },
+                    { tES: document.getElementById('cfg-sk4-t-es').value, tEN: document.getElementById('cfg-sk4-t-en').value, tags: document.getElementById('cfg-sk4-tags').value }
+                ],
+                experiencia: []
+            };
+
+            for(let i=1; i<=3; i++) {
+                nuevaDataMaster.experiencia.push({
+                    comp: document.getElementById(`cfg-exp${i}-comp`).value,
+                    dES: document.getElementById(`cfg-exp${i}-date-es`).value,
+                    dEN: document.getElementById(`cfg-exp${i}-date-en`).value,
+                    tES: document.getElementById(`cfg-exp${i}-title-es`).value,
+                    tEN: document.getElementById(`cfg-exp${i}-title-en`).value,
+                    bES: document.getElementById(`cfg-exp${i}-bullets-es`).value,
+                    bEN: document.getElementById(`cfg-exp${i}-bullets-en`).value
+                });
+            }
+
+            localStorage.setItem('cv_master_data', JSON.stringify(nuevaDataMaster));
+
+            const alertBox = document.getElementById('success-alert');
+            alertBox.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => alertBox.style.display = 'none', 4000);
+        });
+    });
+</script>
+</body>
+</html>

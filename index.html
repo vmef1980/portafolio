@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Víctor Manuel Estrada Funes | CV & Consultoría</title>
+    <!-- Favicon dinámico (Icono de pestaña .ico) -->
+    <link rel="shortcut icon" href="" type="image/x-icon" id="dynamic-favicon">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos profesionales Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Librería para exportar a PDF de forma limpia -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-header {
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-left: 1.5rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .lang-btn {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .lang-btn:hover { background: var(--accent-hover); }
+
+        .pdf-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--border);
+        }
+
+        .pdf-btn:hover {
+            background: #fff;
+            color: var(--bg-color);
+        }
+
+        /* Botón de menú hamburguesa oculto en desktop */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding-top: 2rem;
+            min-height: 45vh;
+        }
+
+        .hero-info { flex: 1; }
+
+        .profile-photo-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            background: var(--card-bg);
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .colegiado {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            background: rgba(59, 130, 246, 0.1);
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            background: var(--card-bg);
+            padding: 0.6rem 1.1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            font-size: 0.95rem;
+            width: 16px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            position: relative;
+            color: #fff;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .profile-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 950px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #111827, #1f2937);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .timeline-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .company {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .date {
+            background: rgba(255,255,255,0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-body li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            list-style: none;
+        }
+
+        .timeline-body li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-card h3 {
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.35rem;
+        }
+
+        .skill-tags {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .cert-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1rem;
+        }
+
+        .cert-item {
+            background: var(--card-bg);
+            padding: 1.1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-info h3 { font-size: 0.95rem; color: #fff; }
+        .cert-info p { font-size: 0.8rem; color: var(--text-secondary); }
+        .cert-date { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .en { display: none; }
+
+        /* Bloque oculto por defecto para que no estorbe en la web */
+        #pdf-table-wrapper {
+            display: none;
+        }
+
+        /* =================================================== */
+        /* MEDIA QUERIES PARA ADAPTABILIDAD MÓVIL             */
+        /* =================================================== */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0b0f19;
+                border-bottom: 1px solid var(--border);
+                padding: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 0.75rem 2rem;
+                font-size: 1.1rem;
+                width: calc(100% - 4rem);
+            }
+
+            .btn-header {
+                margin: 0.75rem 2rem;
+                width: calc(100% - 4rem);
+                text-align: center;
+                padding: 0.75rem;
+            }
+
+            main {
+                margin-top: 80px;
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 2.5rem 0;
+            }
+
+            .hero-container {
+                flex-direction: column-reverse;
+                gap: 1.5rem;
+                text-align: center;
+                align-items: center;
+                padding-top: 1rem;
+            }
+
+            .profile-photo-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-grid {
+                justify-content: center;
+            }
+
+            .contact-item {
+                width: 100%;
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 1.5rem;
+            }
+
+            h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .services-grid, .skills-grid, .cert-list {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-card, .timeline-item, .skill-card, .cert-item {
+                padding: 1.25rem;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .date {
+                align-self: flex-start;
+                margin-top: 0.25rem;
+            }
+        }
+
+        /* =================================================== */
+        /* CONFIGURACIONES REESTRUCTURADAS DE IMPRESIÓN PDF     */
+        /* =================================================== */
+        .pdf-mode {
+            background: #fff !important;
+            color: #000 !important;
+            width: 100% !important;
+        }
+        
+        .pdf-mode header, .pdf-mode footer, .pdf-mode .pdf-btn, .pdf-mode .lang-btn, .pdf-mode #web-hero-section {
+            display: none !important;
+        }
+
+        .pdf-mode #pdf-table-wrapper {
+            display: block !important; 
+            width: 100% !important;
+            box-sizing: border-box !important;
+            margin-bottom: 15px !important;
+        }
+
+        .pdf-mode main { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            width: 100% !important;
+        }
+
+        .pdf-mode section {
+            padding: 1rem 0 !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            page-break-inside: auto !important;
+            break-inside: auto !important;
+        }
+        
+        .pdf-mode h2 {
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+            margin-bottom: 1rem !important;
+            color: #111827 !important;
+        }
+
+        .pdf-mode .service-card, 
+        .pdf-mode .skill-card, 
+        .pdf-mode .cert-item {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            box-sizing: border-box !important;
+            padding: 1.25rem !important;
+            margin-bottom: 0.75rem !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .pdf-mode .timeline-item {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            box-sizing: border-box !important;
+            padding: 1.5rem !important;
+            margin-bottom: 1rem !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+
+        .pdf-mode .contact-grid {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .pdf-mode .contact-item {
+            display: inline-block !important;
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.8rem !important;
+            margin: 0.2rem !important;
+            box-sizing: border-box !important;
+            color: #374151 !important;
+        }
+
+        .pdf-mode h1 { font-size: 22pt !important; color: #111827 !important; }
+        .pdf-mode .subtitle { font-size: 12pt !important; margin-bottom: 0.75rem !important; }
+        .pdf-mode .colegiado { margin-bottom: 1rem !important; }
+        .pdf-mode .job-title, .pdf-mode .skill-card h3, .pdf-mode .cert-info h3, .pdf-mode .service-card h3 { color: #111827 !important; }
+        .pdf-mode .profile-text, .pdf-mode .timeline-body li, .pdf-mode .skill-tags, .pdf-mode .cert-info p, .pdf-mode .service-card p { color: #374151 !important; }
+    </style>
+</head>
+<body>
+
+    <header id="header-web">
+        <div class="nav-container">
+            <div class="logo">Victor<span>Estrada</span></div>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navbar">
+                <a href="#perfil" class="lang-txt" data-es="Perfil" data-en="Profile" onclick="closeMenu()">Perfil</a>
+                <a href="#servicios" class="lang-txt" data-es="Servicios" data-en="Services" onclick="closeMenu()">Servicios</a>
+                <a href="#experiencia" class="lang-txt" data-es="Experiencia" data-en="Experience" onclick="closeMenu()">Experiencia</a>
+                <a href="#habilidades" class="lang-txt" data-es="Habilidades" data-en="Skills" onclick="closeMenu()">Habilidades</a>
+                <a href="#certificaciones" class="lang-txt" data-es="Certificaciones" data-en="Certifications" onclick="closeMenu()">Certificaciones</a>
+                <button class="btn-header pdf-btn" onclick="exportarAPDF(); closeMenu();" id="btn-pdf">Exportar PDF</button>
+                <button class="btn-header lang-btn" onclick="toggleLanguage(); closeMenu();" id="btn-lang">English</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="cv-content">
+        <!-- Contenedor exclusivo para renderizado seguro de la tabla del PDF -->
+        <div id="pdf-table-wrapper"></div>
+
+        <!-- Sección Hero (Exclusiva Vista Web Regular) -->
+        <section class="hero-container" id="web-hero-section">
+            <div class="hero-info">
+                <h1 class="es">Víctor Manuel Estrada Funes</h1>
+                <h1 class="en">Víctor Manuel Estrada Funes</h1>
+                
+                <div class="subtitle es">Licenciado en Tecnología y Administración de las Telecomunicaciones</div>
+                <div class="subtitle en">Bachelor of Technology & Telecommunications Administration</div>
+                
+                <div>
+                    <span class="colegiado es" id="col-es">Colegiado #36479</span>
+                    <span class="colegiado en" id="col-en">Registered Professional Engineer #36479</span>
+                </div>
+
+                <div class="contact-grid" id="contact-central-grid">
+                    <!-- Inyección vía JavaScript -->
+                </div>
+            </div>
+            <div class="profile-photo-container" id="photo-box">
+                <img src="" alt="Víctor Estrada" class="profile-photo" id="user-img">
+            </div>
+        </section>
+
+        <section id="perfil">
+            <h2 class="es">Perfil Profesional</h2>
+            <h2 class="en">Professional Profile</h2>
+            <p class="profile-text es">
+                Profesional y Líder Técnico con más de 25 años de trayectoria sólida en la administración de infraestructura tecnológica crítica, gestión de centros de datos, continuidad operativa y automatización de procesos en entornos bancarios y corporativos multinacionales. Especialista en diseñar e implementar soluciones de alta disponibilidad, migraciones complejas, planes de recuperación ante desastres (DRP) y optimización de costos bajo una visión altamente estratégica alineada al negocio.
+            </p>
+            <p class="profile-text en">
+                Highly accomplished Technical Leader and Senior Engineer with over 25 years of experience driving critical IT infrastructure management, data center operations, business continuity, and process automation across multinational corporate and banking environments. Expert in high-availability architecture deployment, complex system migrations, Disaster Recovery Planning (DRP), and cost optimization with a strategic vision tightly aligned with enterprise business goals.
+            </p>
+        </section>
+
+        <section id="servicios">
+            <h2 class="es">Servicios de Consultoría e Infraestructura</h2>
+            <h2 class="en">Consulting & Infrastructure Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="es">Diseño y Auditoría de Data Centers</h3>
+                    <h3 class="en">Data Center Design & Auditing</h3>
+                    <p class="es">Consultoría estratégica en arquitectura de centros de datos principales y de contingencia, garantizando máxima continuidad operativa y mitigación de obsolescencia tecnológica.</p>
+                    <p class="en">Strategic consulting for primary and contingency data center architectures, ensuring operational continuity and technological lifecycle optimization.</p>
+                </div>
+                <div class="service-card">
+                    <h3 class="es">Planes de Continuidad y DRP</h3>
+                    <h3 class="en">Business Continuity & DRP</h3>
+                    <p class="es">Desarrollo e implementación integral de planes de recuperación ante desastres para entornos bancarios y corporativos de misión crítica.</p>
+                    <p class="en">Comprehensive formulation and deployment of robust Disaster Recovery Plans tailored for mission-critical banking and corporate environments.</p>
+                </div>
+                <div class="service-card">
+                    <h3 class="es">Automatización de Procesos IT</h3>
+                    <h3 class="en">IT Process Automation</h3>
+                    <p class="es">Optimización de flujos operativos y reducción de costos de TI mediante infraestructura programable y scripting avanzado.</p>
+                    <p class="en">Workflow optimization and IT overhead reduction utilizing automated workflows, configuration policies, and advanced scripting.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia">
+            <h2 class="es">Experiencia Profesional</h2>
+            <h2 class="en">Professional Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="job-title es">Ingeniero Técnico de Infraestructura Principal</div>
+                            <div class="job-title en">Lead Infrastructure Technical Engineer</div>
+                            <div class="company">Conduent Guatemala <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">(Antes Xerox)</span></div>
+                        </div>
+                        <div class="date es">2013 - Actualidad</div>
+                        <div class="date en">2013 - Present</div>
+                    </div>
+                    <div class="timeline-body">
+                        <ul class="es">
+                            <li>Administración integral y soporte global de centros de datos locales y remotos, asegurando continuidad operativa en entornos críticos.</li>
+                            <li>Liderazgo de proyectos globales de infraestructura, migraciones de sistemas complejos y esquemas de seguridad informática.</li>
+                            <li>Automatización de procesos operativos manteniendo alta estabilidad ante múltiples transiciones corporativas.</li>
+                        </ul>
+                        <ul class="en">
+                            <li>Direct full-scale management and global support of local and remote data centers, securing 24/7 high availability.</li>
+                            <li>Lead high-impact infrastructure initiatives, system migrations, and enterprise data protection compliance.</li>
+                            <li>Spearhead core automation scripts maintaining absolute stability across corporate structural shifts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="job-title es">Director de Administración de Sistemas de Información</div>
+                            <div class="job-title en">Director of Information Systems Administration</div>
+                            <div class="company">Banco G&T Continental <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">— El Salvador</span></div>
+                        </div>
+                        <div class="date">2011 - 2013</div>
+                    </div>
+                    <div class="timeline-body">
+                        <ul class="es">
+                            <li>Gestión integral de centros de datos principales y de contingencia para el resguardo de la continuidad bancaria.</li>
+                            <li>Traslado físico exitoso del centro de datos principal con cero interrupciones en servicios críticos del negocio.</li>
+                            <li>Diseño de políticas de modernización tecnológica e implementación de soluciones redundantes de alta disponibilidad.</li>
+                        </ul>
+                        <ul class="en">
+                            <li>Managed the end-to-end core and contingency data center architectures to safeguard operational banking services.</li>
+                            <li>Orchestrated the physical relocation of the core data center with zero downtime on mission-critical systems.</li>
+                            <li>Designed modern hardware replacement policies and deployed high-availability infrastructure networks.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="job-title es">Coordinador de Administración de TI</div>
+                            <div class="job-title en">IT Administration Coordinator</div>
+                            <div class="company">Banco G&T Continental <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">— Guatemala</span></div>
+                        </div>
+                        <div class="date">2007 - 2011</div>
+                    </div>
+                    <div class="timeline-body">
+                        <ul class="es">
+                            <li>Coordinación de infraestructura crítica, liderando equipos en mantenimiento preventivo, monitoreo y soporte de nivel corporativo.</li>
+                            <li>Elaboración y ejecución de presupuestos de inversión alineados a planes de contingencia ante desastres (DRP).</li>
+                        </ul>
+                        <ul class="en">
+                            <li>Coordinated core data center architecture, managing technical teams in preventive maintenance and system monitoring.</li>
+                            <li>Formulated IT financial budgets strictly aligned with comprehensive corporate Disaster Recovery Plans.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades">
+            <h2 class="es">Competencias Técnicas</h2>
+            <h2 class="en">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 class="es">Computación en la Nube</h3><h3 class="en">Cloud Computing</h3>
+                    <div class="skill-tags">Microsoft Azure (IaaS, PaaS), Azure Virtual Machines, Azure Resource Manager (ARM), Migraciones Cloud, Virtualización Empresarial (VMware vSphere, Hyper-V).</div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="es">Ciberseguridad y Redes</h3><h3 class="en">Cybersecurity & Networking</h3>
+                    <div class="skill-tags">Seguridad Perimetral, Cisco PIX/ASA, SonicWall, Firewalls de Próxima Generación (NGFW), VPNs Avanzadas, F5 BIG-IP, Fortimail, Enrutamiento y Conmutación Corporativa (Cisco R&S).</div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="es">Infraestructura y Servidores</h3><h3 class="en">Infrastructure & Servers</h3>
+                    <div class="skill-tags">Servidores de Misión Crítica (HP/COMPAQ Blade, DELL PowerEdge), Windows Server, Active Directory Empresarial, Microsoft Exchange, Unix, Ubuntu, Almacenamiento NAS/SAN (HP EVA, EMC2, Dell EqualLogic), HP Data Protector.</div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="es">Automatización y DevOps</h3><h3 class="en">Automation & DevOps</h3>
+                    <div class="skill-tags">Scripting Avanzado en PowerShell, Automatización de Procesos (Excel VBA), Infraestructura como Código (IaC), Programación de Sistemas Físicos (G-code).</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificaciones">
+            <h2 class="es">Certificaciones Destacadas</h2>
+            <h2 class="en">Key Certifications</h2>
+            <div class="cert-list">
+                <div class="cert-item">
+                    <div class="cert-info">
+                        <h3 class="es">Programa Especializado en Desarrollo de Apps Móviles</h3>
+                        <h3 class="en">Specialised Programme on Mobile App Development</h3>
+                        <p>CDAC — Noida, India</p>
+                    </div>
+                    <div class="cert-date">2026</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-info">
+                        <h3>Network Technician Career Path</h3>
+                        <p>Digital Awareness</p>
+                    </div>
+                    <div class="cert-date">2025</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-info">
+                        <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
+                        <p>Microsoft</p>
+                    </div>
+                    <div class="cert-date">2022</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-info">
+                        <h3>CCNA: Enterprise Networking, Security, Automation</h3>
+                        <p>Cisco</p>
+                    </div>
+                    <div class="cert-date">2020</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-web">
+        <p>© 2026 Víctor Manuel Estrada Funes. Guatemala City, Guatemala.</p>
+    </footer>
+
+    <script>
+        // Funciones de control para el menú móvil
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.remove('active');
+        }
+
+        // CONFIGURACIÓN CENTRALIZADA DINÁMICA
+        const DEFAULT_CONFIG = {
+            colegiado: "36479",
+            telefono: "(502) 5694-2222",
+            correo: "vmef1980@gmail.com",
+            ubicacion: "Guatemala City, Guatemala",
+            linkedin: "https://www.linkedin.com/in/estradafunes/",
+            credly: "https://www.credly.com/users/victor-estrada.2114d8cf",
+            fotoURL: "img/perfil.jpg",
+            faviconURL: "img/perfil.ico"
+        };
+
+        const CONFIG_CENTRALIZADA = JSON.parse(localStorage.getItem('cv_config_data')) || DEFAULT_CONFIG;
+
+        document.getElementById("user-img").src = CONFIG_CENTRALIZADA.fotoURL;
+        document.getElementById("dynamic-favicon").href = CONFIG_CENTRALIZADA.faviconURL;
+
+        document.getElementById("col-es").textContent = `Colegiado #${CONFIG_CENTRALIZADA.colegiado}`;
+        document.getElementById("col-en").textContent = `Registered Professional Engineer #${CONFIG_CENTRALIZADA.colegiado}`;
+
+        const gridContacto = document.getElementById("contact-central-grid");
+        gridContacto.innerHTML = `
+            <div class="contact-item"><i class="fas fa-map-marker-alt"></i> ${CONFIG_CENTRALIZADA.ubicacion}</div>
+            <div class="contact-item"><i class="fas fa-phone"></i> ${CONFIG_CENTRALIZADA.telefono}</div>
+            <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:${CONFIG_CENTRALIZADA.correo}">${CONFIG_CENTRALIZADA.correo}</a></div>
+            <div class="contact-item"><i class="fab fa-linkedin"></i> <a href="${CONFIG_CENTRALIZADA.linkedin}" target="_blank">LinkedIn</a></div>
+            <div class="contact-item"><i class="fas fa-shield-alt"></i> <a href="${CONFIG_CENTRALIZADA.credly}" target="_blank">Credly</a></div>
+        `;
+
+        let currentLang = 'es';
+        function toggleLanguage() {
+            const esElements = document.querySelectorAll('.es');
+            const enElements = document.querySelectorAll('.en');
+            const txtElements = document.querySelectorAll('.lang-txt');
+            const btn = document.getElementById('btn-lang');
+
+            if (currentLang === 'es') {
+                esElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                txtElements.forEach(el => el.textContent = el.getAttribute('data-en'));
+                btn.textContent = 'Español';
+                currentLang = 'en';
+            } else {
+                esElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                txtElements.forEach(el => el.textContent = el.getAttribute('data-es'));
+                btn.textContent = 'English';
+                currentLang = 'es';
+            }
+        }
+
+        // CONTROL DE EXPORTACIÓN ROBUSTO (Solución a pantallas en blanco o cortes drásticos)
+        function exportarAPDF() {
+            const elemento = document.body;
+            const wrapperTabla = document.getElementById('pdf-table-wrapper');
+            
+            // Inyectamos la tabla superior limpia usando anchos absolutos fijos inmunes a fallos de renderizado
+            wrapperTabla.innerHTML = `
+                <table style="width:100% !important; border-collapse:collapse; font-family:sans-serif; box-sizing:border-box !important; table-layout:fixed; margin-bottom:20px;">
+                    <tr>
+                        <td style="vertical-align:top; width:75%; box-sizing:border-box !important; padding-right:15px;">
+                            <h1 style="font-size:24pt; color:#111827; font-weight:700; margin:0 0 6px 0;">Víctor Manuel Estrada Funes</h1>
+                            <div style="font-size:12pt; color:#3b82f6; font-weight:600; margin-bottom:8px;">
+                                ${currentLang === 'es' ? 'Licenciado en Tecnología y Administración de las Telecomunicaciones' : 'Bachelor of Technology & Telecommunications Administration'}
+                            </div>
+                            <div style="font-size:10pt; color:#6b7280; margin-bottom:15px; font-weight:500;">
+                                ${currentLang === 'es' ? 'Colegiado #' + CONFIG_CENTRALIZADA.colegiado : 'Registered Professional Engineer #' + CONFIG_CENTRALIZADA.colegiado}
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span style="display:inline-block; background:#f9fafb; border:1px solid #e5e7eb; padding:5px 10px; font-size:8.5pt; color:#374151; margin-right:6px; margin-bottom:6px; border-radius:6px;">📍 ${CONFIG_CENTRALIZADA.ubicacion}</span>
+                                <span style="display:inline-block; background:#f9fafb; border:1px solid #e5e7eb; padding:5px 10px; font-size:8.5pt; color:#374151; margin-right:6px; margin-bottom:6px; border-radius:6px;">📞 ${CONFIG_CENTRALIZADA.telefono}</span>
+                                <span style="display:inline-block; background:#f9fafb; border:1px solid #e5e7eb; padding:5px 10px; font-size:8.5pt; color:#374151; margin-right:6px; margin-bottom:6px; border-radius:6px;">✉️ ${CONFIG_CENTRALIZADA.correo}</span>
+                            </div>
+                        </td>
+                        <td style="vertical-align:top; width:25%; text-align:right; box-sizing:border-box !important;">
+                            <img src="${CONFIG_CENTRALIZADA.fotoURL}" style="width:120px; height:120px; border-radius:12px; border:2px solid #d1d5db; object-fit:cover; display:inline-block;">
+                        </td>
+                    </tr>
+                </table>
+            `;
+
+            // En caso de que el menú estuviera desplegado al exportar, lo cerramos para evitar artefactos visuales
+            closeMenu();
+
+            // Añadir clase de impresión
+            elemento.classList.add('pdf-mode');
+
+            // Configuración balanceada estándar (Delegamos márgenes reales a html2pdf para evitar desfases del canvas)
+            const opciones = {
+                margin:       [15, 15, 15, 15], 
+                filename:     `CV_Victor_Estrada_${currentLang.toUpperCase()}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    logging: false, 
+                    useCORS: true,
+                    scrollY: 0
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Ejecutar la exportación apuntando al elemento completo de forma controlada
+            html2pdf().set(opciones).from(elemento).save().then(() => {
+                elemento.classList.remove('pdf-mode');
+                wrapperTabla.innerHTML = '';
+            }).catch(err => {
+                console.error("Error en PDF:", err);
+                elemento.classList.remove('pdf-mode');
+                wrapperTabla.innerHTML = '';
+            });
+        }
+    </script>
+</body>
+</html>
