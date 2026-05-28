@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Víctor Manuel Estrada Funes | CV & Consultoría</title>
-    <!-- Favicon dinámico (Icono de pestaña .ico) -->
     <link rel="shortcut icon" href="" type="image/x-icon" id="dynamic-favicon">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Iconos profesionales Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Librería para exportar a PDF de forma limpia -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
@@ -19,7 +16,10 @@
             --text-secondary: #9ca3af;
             --accent: #3b82f6;
             --accent-hover: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.35);
             --border: #1f2937;
+            --whatsapp-color: #25D366;
+            --whatsapp-hover: #4ae082;
         }
 
         * {
@@ -41,8 +41,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
         }
@@ -65,6 +66,7 @@
 
         .logo span {
             color: var(--accent);
+            text-shadow: 0 0 12px var(--accent-glow);
         }
 
         nav {
@@ -78,33 +80,39 @@
             margin-left: 1.5rem;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         nav a:hover {
             color: var(--text-primary);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
 
         .btn-header {
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.85rem;
             margin-left: 1.5rem;
-            transition: background 0.3s, color 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .lang-btn {
             background: var(--accent);
             color: #fff;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.2);
         }
 
-        .lang-btn:hover { background: var(--accent-hover); }
+        .lang-btn:hover { 
+            background: var(--accent-hover); 
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transform: translateY(-1px);
+        }
 
         .pdf-btn {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03);
             color: #fff;
             border: 1px solid var(--border);
         }
@@ -112,9 +120,10 @@
         .pdf-btn:hover {
             background: #fff;
             color: var(--bg-color);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
         }
 
-        /* Botón de menú hamburguesa oculto en desktop */
         .menu-toggle {
             display: none;
             background: transparent;
@@ -156,6 +165,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.15);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .profile-photo-container:hover {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 28px var(--accent-glow);
+            border-color: var(--accent-hover);
         }
 
         .profile-photo {
@@ -178,17 +195,19 @@
             color: var(--accent);
             font-weight: 500;
             margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
         }
 
         .colegiado {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.06);
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
             border: 1px solid rgba(59, 130, 246, 0.2);
+            font-weight: 500;
         }
 
         .contact-grid {
@@ -207,6 +226,23 @@
             border-radius: 8px;
             border: 1px solid var(--border);
             font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(17, 24, 39, 0.7);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transform: translateY(-1px);
+        }
+
+        .contact-item.whatsapp-highlight {
+            border-color: rgba(37, 211, 102, 0.3);
+        }
+
+        .contact-item.whatsapp-highlight:hover {
+            border-color: var(--whatsapp-color);
+            background: rgba(37, 211, 102, 0.08);
         }
 
         .contact-item i {
@@ -216,9 +252,22 @@
             text-align: center;
         }
 
+        .contact-item.whatsapp-highlight i {
+            color: var(--whatsapp-color);
+        }
+
         .contact-item a {
-            color: var(--accent);
+            color: var(--text-primary);
             text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--accent-hover);
+        }
+
+        .contact-item.whatsapp-highlight a:hover {
+            color: var(--whatsapp-hover);
         }
 
         h2 {
@@ -240,6 +289,7 @@
             height: 3px;
             background: var(--accent);
             border-radius: 2px;
+            box-shadow: 0 0 8px var(--accent);
         }
 
         .profile-text {
@@ -255,16 +305,17 @@
         }
 
         .service-card {
-            background: linear-gradient(145deg, #111827, #1f2937);
+            background: linear-gradient(145deg, #111827, #151f32);
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid var(--border);
-            transition: transform 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .service-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(59, 130, 246, 0.1);
         }
 
         .service-card h3 {
@@ -289,6 +340,11 @@
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid var(--border);
+            transition: border-color 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .timeline-header {
@@ -318,6 +374,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
         .timeline-body li {
@@ -333,6 +390,7 @@
             position: absolute;
             left: 0;
             color: var(--accent);
+            text-shadow: 0 0 4px var(--accent);
         }
 
         .skills-grid {
@@ -346,6 +404,12 @@
             padding: 1.5rem;
             border-radius: 12px;
             border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: linear-gradient(180deg, #111827 0%, #141e30 100%);
         }
 
         .skill-card h3 {
@@ -377,6 +441,13 @@
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: scale(1.01);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .cert-info h3 { font-size: 0.95rem; color: #fff; }
@@ -394,7 +465,6 @@
 
         .en { display: none; }
 
-        /* Bloque oculto por defecto para que no estorbe en la web */
         #pdf-table-wrapper {
             display: none;
         }
@@ -421,7 +491,7 @@
                 background: #0b0f19;
                 border-bottom: 1px solid var(--border);
                 padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                box-shadow: 0 10px 15px rgba(0,0,0,0.5);
             }
 
             nav.active {
@@ -512,7 +582,7 @@
         }
 
         /* =================================================== */
-        /* CONFIGURACIONES REESTRUCTURADAS DE IMPRESIÓN PDF     */
+        /* CONFIGURACIONES DE IMPRESIÓN PDF                     */
         /* =================================================== */
         .pdf-mode {
             background: #fff !important;
@@ -614,17 +684,15 @@
                 <a href="#experiencia" class="lang-txt" data-es="Experiencia" data-en="Experience" onclick="closeMenu()">Experiencia</a>
                 <a href="#habilidades" class="lang-txt" data-es="Habilidades" data-en="Skills" onclick="closeMenu()">Habilidades</a>
                 <a href="#certificaciones" class="lang-txt" data-es="Certificaciones" data-en="Certifications" onclick="closeMenu()">Certificaciones</a>
-                <button class="btn-header pdf-btn" onclick="exportarAPDF(); closeMenu();" id="btn-pdf">Exportar PDF</button>
-                <button class="btn-header lang-btn" onclick="toggleLanguage(); closeMenu();" id="btn-lang">English</button>
+                <button class="btn-header pdf-btn" onclick="exportarAPDF(); closeMenu();" id="btn-pdf"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                <button class="btn-header lang-btn" onclick="toggleLanguage(); closeMenu();" id="btn-lang"><i class="fas fa-language"></i> English</button>
             </nav>
         </div>
     </header>
 
     <main id="cv-content">
-        <!-- Contenedor exclusivo para renderizado seguro de la tabla del PDF -->
         <div id="pdf-table-wrapper"></div>
 
-        <!-- Sección Hero (Exclusiva Vista Web Regular) -->
         <section class="hero-container" id="web-hero-section">
             <div class="hero-info">
                 <h1 class="es">Víctor Manuel Estrada Funes</h1>
@@ -638,9 +706,7 @@
                     <span class="colegiado en" id="col-en">Registered Professional Engineer #36479</span>
                 </div>
 
-                <div class="contact-grid" id="contact-central-grid">
-                    <!-- Inyección vía JavaScript -->
-                </div>
+                <div class="contact-grid" id="contact-central-grid"></div>
             </div>
             <div class="profile-photo-container" id="photo-box">
                 <img src="" alt="Víctor Estrada" class="profile-photo" id="user-img">
@@ -781,41 +847,93 @@
             </div>
         </section>
 
-        <section id="certificaciones">
-            <h2 class="es">Certificaciones Destacadas</h2>
-            <h2 class="en">Key Certifications</h2>
-            <div class="cert-list">
-                <div class="cert-item">
-                    <div class="cert-info">
-                        <h3 class="es">Programa Especializado en Desarrollo de Apps Móviles</h3>
-                        <h3 class="en">Specialised Programme on Mobile App Development</h3>
-                        <p>CDAC — Noida, India</p>
-                    </div>
-                    <div class="cert-date">2026</div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-info">
-                        <h3>Network Technician Career Path</h3>
-                        <p>Digital Awareness</p>
-                    </div>
-                    <div class="cert-date">2025</div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-info">
-                        <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
-                        <p>Microsoft</p>
-                    </div>
-                    <div class="cert-date">2022</div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-info">
-                        <h3>CCNA: Enterprise Networking, Security, Automation</h3>
-                        <p>Cisco</p>
-                    </div>
-                    <div class="cert-date">2020</div>
-                </div>
+        <section id="certificaciones" class="section-container">
+    <h2 class="section-title">
+        <span class="es">Certificaciones Destacadas</span>
+        <span class="en">Featured Certifications</span>
+    </h2>
+    
+    <div class="cert-list" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+        <!-- 1. Tarjeta Dinámica de ITEC (Ocupa ambas columnas para balancear la cuadrícula) -->
+        <div class="cert-item" id="itec-cert-card" style="grid-column: span 2; border-left: 3px solid var(--accent); background: linear-gradient(90deg, rgba(59,130,246,0.05) 0%, var(--card-bg) 100%); display: flex; align-items: center; justify-content: space-between; padding: 1.25rem;">
+            <!-- El contenido de esta tarjeta se inyecta dinámicamente mediante tu script de JavaScript -->
+        </div>
+        
+        <!-- 2. ISC2 Candidate -->
+        <div class="cert-item" style="border-left: 3px solid #10b981; background: linear-gradient(90deg, rgba(16,185,129,0.05) 0%, var(--card-bg) 100%);">
+            <div class="cert-info">
+                <h3 style="color: #10b981 !important;">ISC2 Candidate</h3>
+                <p>ISC2 — Cybersecurity Professional Pathway</p>
             </div>
-        </section>
+            <div class="cert-date" style="color: #10b981;">2026</div>
+        </div>
+
+        <!-- 3. Cisco DevNet Associate -->
+        <div class="cert-item" style="border-left: 3px solid #3b82f6; background: linear-gradient(90deg, rgba(59,130,246,0.07) 0%, var(--card-bg) 100%);">
+            <div class="cert-info">
+                <h3 style="color: #60a5fa !important;">Cisco Certified DevNet Associate</h3>
+                <p>Cisco Networking Academy — APIs, Linux & Infrastructure Automation</p>
+            </div>
+            <div class="cert-date" style="color: #3b82f6;">2025</div>
+        </div>
+
+        <!-- 4. Cisco Network Technician Career Path -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>Network Technician Career Path</h3>
+                <p>Cisco Networking Academy — Enterprise Support & Diagnostics</p>
+            </div>
+            <div class="cert-date">2025</div>
+        </div>
+
+        <!-- 5. Python Essentials 1 -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>Python Essentials 1</h3>
+                <p>OpenEDG Python Institute / Cisco Academy</p>
+            </div>
+            <div class="cert-date">2023</div>
+        </div>
+
+        <!-- 6. Microsoft Certified: Azure Fundamentals -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
+                <p>Microsoft Cloud Certifications / ACE Reviewed</p>
+            </div>
+            <div class="cert-date">2022</div>
+        </div>
+
+        <!-- 7. CCNA: Enterprise Networking, Security, and Automation -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>CCNA: Enterprise Networking, Security, and Automation</h3>
+                <p>Cisco Routing & Switching — Advanced Level</p>
+            </div>
+            <div class="cert-date">2020</div>
+        </div>
+
+        <!-- 8. CCNA: Switching, Routing, and Wireless Essentials -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>CCNA: Switching, Routing, and Wireless Essentials</h3>
+                <p>Cisco Routing & Switching — Core Level</p>
+            </div>
+            <div class="cert-date">2020</div>
+        </div>
+
+        <!-- 9. CCNA: Introduction to Networks -->
+        <div class="cert-item">
+            <div class="cert-info">
+                <h3>CCNA: Introduction to Networks</h3>
+                <p>Cisco Routing & Switching — Base Level</p>
+            </div>
+            <div class="cert-date">2020</div>
+        </div>
+    </div>
+</section>
+
+
     </main>
 
     <footer id="footer-web">
@@ -823,7 +941,6 @@
     </footer>
 
     <script>
-        // Funciones de control para el menú móvil
         function toggleMenu() {
             const navbar = document.getElementById('navbar');
             navbar.classList.toggle('active');
@@ -834,7 +951,7 @@
             navbar.classList.remove('active');
         }
 
-        // CONFIGURACIÓN CENTRALIZADA DINÁMICA
+        // Configuración centralizada incluyendo tu ID real de Certificación ITEC de la India
         const DEFAULT_CONFIG = {
             colegiado: "36479",
             telefono: "(502) 5694-2222",
@@ -843,7 +960,8 @@
             linkedin: "https://www.linkedin.com/in/estradafunes/",
             credly: "https://www.credly.com/users/victor-estrada.2114d8cf",
             fotoURL: "img/perfil.jpg",
-            faviconURL: "img/perfil.ico"
+            faviconURL: "img/perfil.ico",
+            itecID: "2025GTM000095" 
         };
 
         const CONFIG_CENTRALIZADA = JSON.parse(localStorage.getItem('cv_config_data')) || DEFAULT_CONFIG;
@@ -854,14 +972,99 @@
         document.getElementById("col-es").textContent = `Colegiado #${CONFIG_CENTRALIZADA.colegiado}`;
         document.getElementById("col-en").textContent = `Registered Professional Engineer #${CONFIG_CENTRALIZADA.colegiado}`;
 
+        // Limpieza del número telefónico para la API de WhatsApp
+        const numeroLimpioWhatsApp = CONFIG_CENTRALIZADA.telefono.replace(/[^0-9]/g, '');
+        const mensajeWhatsApp = encodeURIComponent("¡Hola Víctor! Me interesa obtener más información sobre tus servicios de consultoría e infraestructura tecnológica.");
+
+        // Construcción de la URL de búsqueda exacta para Google Maps
+        const queryMaps = encodeURIComponent(CONFIG_CENTRALIZADA.ubicacion);
+        const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${queryMaps}`;
+
         const gridContacto = document.getElementById("contact-central-grid");
         gridContacto.innerHTML = `
-            <div class="contact-item"><i class="fas fa-map-marker-alt"></i> ${CONFIG_CENTRALIZADA.ubicacion}</div>
-            <div class="contact-item"><i class="fas fa-phone"></i> ${CONFIG_CENTRALIZADA.telefono}</div>
-            <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:${CONFIG_CENTRALIZADA.correo}">${CONFIG_CENTRALIZADA.correo}</a></div>
-            <div class="contact-item"><i class="fab fa-linkedin"></i> <a href="${CONFIG_CENTRALIZADA.linkedin}" target="_blank">LinkedIn</a></div>
-            <div class="contact-item"><i class="fas fa-shield-alt"></i> <a href="${CONFIG_CENTRALIZADA.credly}" target="_blank">Credly</a></div>
+            <div class="contact-item">
+                <i class="fas fa-earth-americas"></i> 
+                <a href="${urlGoogleMaps}" target="_blank">${CONFIG_CENTRALIZADA.ubicacion}</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-volume"></i> 
+                <a href="tel:${CONFIG_CENTRALIZADA.telefono}">${CONFIG_CENTRALIZADA.telefono}</a>
+            </div>
+            <div class="contact-item whatsapp-highlight">
+                <i class="fab fa-whatsapp"></i> 
+                <a href="https://wa.me/${numeroLimpioWhatsApp}?text=${mensajeWhatsApp}" target="_blank">WhatsApp</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope-open-text"></i> 
+                <a href="mailto:${CONFIG_CENTRALIZADA.correo}">${CONFIG_CENTRALIZADA.correo}</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin-in"></i> 
+                <a href="${CONFIG_CENTRALIZADA.linkedin}" target="_blank">LinkedIn</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-award"></i> 
+                <a href="${CONFIG_CENTRALIZADA.credly}" target="_blank">Credly</a>
+            </div>
         `;
+
+        // Renderizado dinámico de la tarjeta de ITEC con inyección de código automatizada
+        const itecCard = document.getElementById("itec-cert-card");
+        itecCard.innerHTML = `
+            <div class="cert-info">
+                <h3 class="es">Programa Especializado en Desarrollo de Apps Móviles (ITEC)</h3>
+                <h3 class="en">Specialised Programme on Mobile App Development (ITEC)</h3>
+                <p>CDAC — Noida, India</p>
+                <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-secondary);">
+                    ID: <span style="color: var(--accent); font-family: monospace;">${CONFIG_CENTRALIZADA.itecID}</span>
+                </p>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                <div class="cert-date">2026</div>
+                <a href="https://itecgoi.in/Certificate_Verification" 
+                   target="_blank" 
+                   id="btn-verificar-india"
+                   style="font-size: 0.75rem; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 4px 10px; border-radius: 6px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 4px;"
+                   onmouseover="this.style.background='var(--accent)'; this.style.color='#fff';"
+                   onmouseout="this.style.background='transparent'; this.style.color='var(--accent)';"
+                   class="no-pdf">
+                   <i class="fas fa-external-link-alt"></i> Verificar
+                </a>
+            </div>
+        `;
+
+        // Interceptor del click para automatizar el llenado del ID en el Portal de la India
+        document.getElementById("btn-verificar-india").addEventListener("click", function(e) {
+            // Plan de respaldo: Copiar automáticamente al portapapeles por restricciones de seguridad entre dominios
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(CONFIG_CENTRALIZADA.itecID);
+            }
+            
+            // Abrimos la ventana de verificación enviando el ID mediante el Hash URL
+            const ventanaIndia = window.open(`https://itecgoi.in/Certificate_Verification#${CONFIG_CENTRALIZADA.itecID}`, '_blank');
+            
+            // Inyectamos el valor una vez el DOM del portal remoto termine de inicializarse
+            if (ventanaIndia) {
+                const checkDOMReady = setInterval(() => {
+                    try {
+                        if (ventanaIndia.document && ventanaIndia.document.getElementById("txtcertficatesearch")) {
+                            const inputCedula = ventanaIndia.document.getElementById("txtcertficatesearch");
+                            inputCedula.value = CONFIG_CENTRALIZADA.itecID;
+                            
+                            // Forzamos el desencadenador nativo de la India para preparar la encriptación CryptoJS
+                            if (typeof ventanaIndia.appened === "function") {
+                                ventanaIndia.appened();
+                            }
+                            clearInterval(checkDOMReady);
+                        }
+                    } catch (err) {
+                        // Captura las restricciones de origen cruzado (CORS) del navegador si ocurren.
+                        // El ID ya queda copiado en el portapapeles del usuario como contingencia.
+                        clearInterval(checkDOMReady);
+                    }
+                }, 500);
+            }
+        });
 
         let currentLang = 'es';
         function toggleLanguage() {
@@ -874,23 +1077,21 @@
                 esElements.forEach(el => el.style.display = 'none');
                 enElements.forEach(el => el.style.display = 'block');
                 txtElements.forEach(el => el.textContent = el.getAttribute('data-en'));
-                btn.textContent = 'Español';
+                btn.innerHTML = '<i class="fas fa-language"></i> Español';
                 currentLang = 'en';
             } else {
                 esElements.forEach(el => el.style.display = 'block');
                 enElements.forEach(el => el.style.display = 'none');
                 txtElements.forEach(el => el.textContent = el.getAttribute('data-es'));
-                btn.textContent = 'English';
+                btn.innerHTML = '<i class="fas fa-language"></i> English';
                 currentLang = 'es';
             }
         }
 
-        // CONTROL DE EXPORTACIÓN ROBUSTO (Solución a pantallas en blanco o cortes drásticos)
         function exportarAPDF() {
             const elemento = document.body;
             const wrapperTabla = document.getElementById('pdf-table-wrapper');
             
-            // Inyectamos la tabla superior limpia usando anchos absolutos fijos inmunes a fallos de renderizado
             wrapperTabla.innerHTML = `
                 <table style="width:100% !important; border-collapse:collapse; font-family:sans-serif; box-sizing:border-box !important; table-layout:fixed; margin-bottom:20px;">
                     <tr>
@@ -915,13 +1116,9 @@
                 </table>
             `;
 
-            // En caso de que el menú estuviera desplegado al exportar, lo cerramos para evitar artefactos visuales
             closeMenu();
-
-            // Añadir clase de impresión
             elemento.classList.add('pdf-mode');
 
-            // Configuración balanceada estándar (Delegamos márgenes reales a html2pdf para evitar desfases del canvas)
             const opciones = {
                 margin:       [15, 15, 15, 15], 
                 filename:     `CV_Victor_Estrada_${currentLang.toUpperCase()}.pdf`,
@@ -935,7 +1132,6 @@
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // Ejecutar la exportación apuntando al elemento completo de forma controlada
             html2pdf().set(opciones).from(elemento).save().then(() => {
                 elemento.classList.remove('pdf-mode');
                 wrapperTabla.innerHTML = '';
