@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Víctor Manuel Estrada Funes | CV y Consultoría</title>
+    <meta name="description" content="Currículum de Víctor Manuel Estrada Funes: infraestructura de TI, centros de datos, continuidad del negocio y automatización.">
+    <meta name="theme-color" content="#0b0f19">
+    <link rel="icon" href="img/perfil.ico" id="dynamic-favicon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Saltar al contenido</a>
+
+    <header class="site-header">
+        <div class="nav-container">
+            <a class="logo" href="#top" aria-label="Inicio">Victor<span>Estrada</span></a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="navbar" aria-expanded="false" aria-label="Abrir menú">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <nav id="navbar" class="navbar">
+                <a href="#perfil" data-i18n="navPerfil">Perfil</a>
+                <a href="#servicios" data-i18n="navServicios">Servicios</a>
+                <a href="#experiencia" data-i18n="navExperiencia">Experiencia</a>
+                <a href="#habilidades" data-i18n="navHabilidades">Habilidades</a>
+                <a href="#certificaciones" data-i18n="navCertificaciones">Certificaciones</a>
+                <button class="btn-header btn-pdf" id="btn-pdf" type="button">
+                    <i class="fas fa-file-pdf" aria-hidden="true"></i><span data-i18n="btnPdf">Exportar PDF</span>
+                </button>
+                <button class="btn-header btn-lang" id="btn-lang" type="button">
+                    <i class="fas fa-language" aria-hidden="true"></i><span data-i18n="btnLang">English</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="hero-info">
+                <h1 id="hero-name">Víctor Manuel Estrada Funes</h1>
+                <p class="subtitle" id="hero-title"></p>
+                <p><span class="colegiado" id="hero-colegiado"></span></p>
+                <ul class="contact-grid" id="contact-grid"></ul>
+            </div>
+            <div class="profile-photo spotlight">
+                <img src="" alt="" id="user-img" width="220" height="220">
+                <span class="profile-photo__fallback" id="photo-fallback" aria-hidden="true"></span>
+            </div>
+        </section>
+
+        <section id="perfil" class="section">
+            <h2 data-i18n="secPerfil">Perfil profesional</h2>
+            <p class="profile-text" id="perfil-text"></p>
+        </section>
+
+        <section id="servicios" class="section">
+            <h2 data-i18n="secServicios">Servicios de consultoría e infraestructura</h2>
+            <div class="services-grid" id="services-grid"></div>
+        </section>
+
+        <section id="experiencia" class="section">
+            <h2 data-i18n="secExperiencia">Experiencia profesional</h2>
+            <div class="timeline" id="timeline"></div>
+        </section>
+
+        <section id="habilidades" class="section">
+            <h2 data-i18n="secHabilidades">Competencias técnicas</h2>
+            <div class="skills-grid" id="skills-grid"></div>
+        </section>
+
+        <section id="certificaciones" class="section">
+            <h2 data-i18n="secCertificaciones">Certificaciones destacadas</h2>
+            <div class="cert-list" id="cert-list"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p id="footer-text"></p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="js/data.js" defer></script>
+    <script src="js/store.js" defer></script>
+    <script src="js/i18n.js" defer></script>
+    <script src="js/render.js" defer></script>
+    <script src="js/pdf.js" defer></script>
+    <script src="js/cursor.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>

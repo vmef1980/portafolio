@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Administración del CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar__inner">
+            <div>
+                <h1>Administración del CV</h1>
+                <span class="status" id="save-status" data-state="clean">Sin cambios</span>
+            </div>
+            <div class="topbar__actions">
+                <a class="btn btn--ghost" href="index.html" target="_blank" rel="noopener">Ver sitio</a>
+                <button class="btn btn--primary" id="btn-save" type="button" title="Ctrl + S">Guardar cambios</button>
+            </div>
+        </div>
+        <nav class="tabs" aria-label="Secciones">
+            <a href="#sec-personal">Datos personales</a>
+            <a href="#sec-perfil">Perfil</a>
+            <a href="#sec-servicios">Servicios</a>
+            <a href="#sec-experiencia">Experiencia</a>
+            <a href="#sec-habilidades">Competencias</a>
+            <a href="#sec-certificaciones">Certificaciones</a>
+            <a href="#sec-publicar">Publicar y respaldo</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="alert" id="alert" role="alert" hidden></div>
+
+        <section class="panel" id="sec-personal">
+            <h2>Datos personales y contacto</h2>
+            <div class="photo-row">
+                <img id="photo-preview" class="photo-preview" alt="Vista previa de la foto">
+                <div class="field photo-field">
+                    <label for="f-personal-foto">Foto de perfil (ruta)</label>
+                    <input id="f-personal-foto" type="text" data-path="personal.foto" placeholder="img/perfil.jpg">
+                    <p class="help">Ruta relativa al sitio, p. ej. <code>img/perfil.jpg</code>. O sube una imagen y quedará incrustada en los datos (se reduce a 480 px).</p>
+                    <label class="btn btn--ghost btn--small file-btn">
+                        Subir imagen…<input type="file" id="photo-file" accept="image/*" hidden>
+                    </label>
+                </div>
+            </div>
+            <div id="personal-fields"></div>
+        </section>
+
+        <section class="panel" id="sec-perfil">
+            <h2>Perfil profesional</h2>
+            <div id="perfil-fields"></div>
+        </section>
+
+        <section class="panel" id="sec-servicios">
+            <div class="panel__head">
+                <h2>Servicios <span class="count" id="count-servicios"></span></h2>
+                <button class="btn btn--ghost btn--small" type="button" data-action="add" data-list="servicios">+ Agregar servicio</button>
+            </div>
+            <div class="list" id="list-servicios"></div>
+        </section>
+
+        <section class="panel" id="sec-experiencia">
+            <div class="panel__head">
+                <h2>Experiencia <span class="count" id="count-experiencia"></span></h2>
+                <button class="btn btn--ghost btn--small" type="button" data-action="add" data-list="experiencia">+ Agregar puesto</button>
+            </div>
+            <div class="list" id="list-experiencia"></div>
+        </section>
+
+        <section class="panel" id="sec-habilidades">
+            <div class="panel__head">
+                <h2>Competencias técnicas <span class="count" id="count-habilidades"></span></h2>
+                <button class="btn btn--ghost btn--small" type="button" data-action="add" data-list="habilidades">+ Agregar bloque</button>
+            </div>
+            <div class="list" id="list-habilidades"></div>
+        </section>
+
+        <section class="panel" id="sec-certificaciones">
+            <div class="panel__head">
+                <h2>Certificaciones <span class="count" id="count-certificaciones"></span></h2>
+                <button class="btn btn--ghost btn--small" type="button" data-action="add" data-list="certificaciones">+ Agregar certificación</button>
+            </div>
+            <div class="list" id="list-certificaciones"></div>
+        </section>
+
+        <section class="panel" id="sec-publicar">
+            <h2>Publicar y respaldo</h2>
+            <p class="lead">«Guardar cambios» los guarda <strong>solo en este navegador</strong>. Para que los vean todos los visitantes del sitio, descarga el archivo <code>data.js</code> y reemplaza <code>js/data.js</code> en tu servidor.</p>
+            <div class="action-grid">
+                <div class="action">
+                    <h3>Publicar</h3>
+                    <p>Genera <code>data.js</code> con todo el contenido actual.</p>
+                    <button class="btn btn--primary btn--small" id="btn-datajs" type="button">Descargar data.js</button>
+                </div>
+                <div class="action">
+                    <h3>Respaldo</h3>
+                    <p>Guarda o recupera una copia en JSON.</p>
+                    <div class="btn-row">
+                        <button class="btn btn--ghost btn--small" id="btn-export" type="button">Exportar JSON</button>
+                        <label class="btn btn--ghost btn--small file-btn">Importar JSON<input type="file" id="import-file" accept="application/json,.json" hidden></label>
+                    </div>
+                </div>
+                <div class="action action--danger">
+                    <h3>Restablecer</h3>
+                    <p>Descarta lo guardado en este navegador y vuelve a <code>js/data.js</code>.</p>
+                    <button class="btn btn--danger btn--small" id="btn-reset" type="button">Restablecer</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
