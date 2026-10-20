@@ -1,0 +1,402 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Presupuesto Ciberseguridad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: catálogo de opciones a la izquierda, resumen fijo a la derecha; en teléfono el resumen baja y queda una barra de total abajo. */
+:root{
+  --bg:#f3f6fb; --surface:#ffffff; --surface-2:#eaf0f8; --line:#d6dfeb;
+  --fg:#0d1626; --muted:#566377; --accent:#1f5fe0; --accent-ink:#ffffff; --accent-soft:#e3ecfd;
+  --free:#0f7a55; --free-soft:#dff3ea; --warn:#9a5a00; --warn-soft:#fdf0d9;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0a0f1a; --surface:#111a2a; --surface-2:#172338; --line:#24324a;
+  --fg:#e9eef7; --muted:#9aa8bd; --accent:#5b93ff; --accent-ink:#06101f; --accent-soft:#16264a;
+  --free:#4cc79a; --free-soft:#10302a; --warn:#f0b45a; --warn-soft:#33260f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a0f1a; --surface:#111a2a; --surface-2:#172338; --line:#24324a;
+  --fg:#e9eef7; --muted:#9aa8bd; --accent:#5b93ff; --accent-ink:#06101f; --accent-soft:#16264a;
+  --free:#4cc79a; --free-soft:#10302a; --warn:#f0b45a; --warn-soft:#33260f; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 96px}
+.wrap{max-width:1180px;margin:0 auto}
+header{padding-block:40px 28px;display:grid;gap:14px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);line-height:1.08;margin:0;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end;margin-top:8px}
+.field{display:grid;gap:4px}
+.field label{font-size:12px;color:var(--muted);font-weight:500}
+.field input{font-family:var(--mono);font-size:15px;width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.presets span{font-size:12px;color:var(--muted);width:100%;font-weight:500}
+.btn{font:inherit;font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.ghost{background:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+.group{display:grid;gap:12px;margin-bottom:30px}
+.group h2{font-family:var(--display);font-size:20px;margin:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.group h2 small{font-family:var(--body);font-size:13px;font-weight:400;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+.item{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;display:grid;gap:10px;align-content:start;transition:border-color .15s,box-shadow .15s}
+.item.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.item .pick{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;cursor:pointer}
+.item input[type=checkbox].sel{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent);cursor:pointer}
+.item .name{font-weight:600;line-height:1.3}
+.item .prov{font-size:13px;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.chip.free{background:var(--free-soft);color:var(--free);font-weight:600}
+.chip.usd{background:var(--accent-soft);color:var(--accent)}
+.price{font-family:var(--mono);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums;margin-left:auto}
+.price s{font-size:13px;color:var(--muted);font-weight:500;margin-right:6px}
+.note{font-size:13px;color:var(--muted);margin:0}
+.toggle{display:flex;gap:8px;align-items:center;font-size:13px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+details{font-size:13px}
+details summary{cursor:pointer;color:var(--accent);font-weight:500}
+details table{width:100%;border-collapse:collapse;margin-top:6px;font-variant-numeric:tabular-nums}
+details td{padding:4px 0;border-bottom:1px solid var(--line)}
+details td:last-child{text-align:right;font-family:var(--mono)}
+
+aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:16px}
+aside h2{font-family:var(--display);font-size:18px;margin:0}
+.total{display:grid;gap:2px}
+.total .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.total .big{font-family:var(--mono);font-size:36px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--surface-2);border-radius:8px;padding:10px}
+.stat b{display:block;font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px}
+.lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding-bottom:8px;border-bottom:1px dashed var(--line)}
+.lines li span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.lines .rm{background:none;border:0;padding:0;color:var(--muted);cursor:pointer;font:inherit;font-size:12px;text-align:left;width:max-content}
+.lines .rm:hover{color:var(--accent)}
+.empty{font-size:14px;color:var(--muted)}
+.lines .sub{font-size:12px;color:var(--muted)}
+.mat{display:grid;gap:6px;border:0;border-top:1px solid var(--line);margin:0;padding:10px 0 0;min-width:0}
+.mat-h{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0;margin-bottom:4px}
+.opt{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:8px;align-items:start;font-size:13px;padding:7px 8px;border-radius:8px;border:1px solid transparent;cursor:pointer}
+.opt:hover{background:var(--surface-2)}
+.opt.is-on{border-color:var(--accent);background:var(--accent-soft)}
+.opt input{margin:2px 0 0;accent-color:var(--accent)}
+.opt-p{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.chip.guided{background:var(--warn-soft);color:var(--warn);font-size:11px;padding:1px 6px;margin-left:4px}
+.mat ul{margin:4px 0 0;padding-left:18px;display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.tips{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:10px;margin-bottom:30px}
+.tips h2{font-family:var(--display);font-size:20px;margin:0}
+.tips ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:14px}
+.tips b{color:var(--fg)}
+.free-t{color:var(--free);font-weight:600}
+.alert{font-size:13px;background:var(--warn-soft);color:var(--warn);padding:10px 12px;border-radius:8px}
+.fine{font-size:12px;color:var(--muted);margin:0}
+
+.bar{position:fixed;left:0;right:0;bottom:0;display:none;justify-content:space-between;align-items:center;gap:12px;
+  background:var(--surface);border-top:1px solid var(--line);
+  padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:5}
+.bar b{font-family:var(--mono);font-size:20px;color:var(--accent);font-variant-numeric:tabular-nums}
+.bar a{color:var(--accent);font-weight:600;text-decoration:none;font-size:14px}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  aside{position:static}
+  .bar{display:flex}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Guatemala · precios de referencia 2026</div>
+    <h1>¿Cuánto cuesta tu ruta en ciberseguridad?</h1>
+    <p class="lede">Elige maestrías, postgrados, certificaciones y cursos. El total, la duración y el pago mensual promedio se calculan al instante. Los exámenes internacionales se cobran en dólares y se convierten con el tipo de cambio que indiques.</p>
+    <div class="toolbar">
+      <div class="field">
+        <label for="fx">Tipo de cambio (Q por US$)</label>
+        <input id="fx" type="number" min="1" step="0.01" value="7.70" inputmode="decimal">
+      </div>
+      <div class="presets" role="group" aria-label="Rutas sugeridas">
+        <span>Rutas sugeridas</span>
+        <button class="btn" type="button" data-preset="guided">Certificaciones con acompañamiento</button>
+        <button class="btn" type="button" data-preset="certs">Certificaciones por tu cuenta</button>
+        <button class="btn" type="button" data-preset="unis">UNIS + CISSP</button>
+        <button class="btn" type="button" data-preset="galileo">Galileo + CISSP</button>
+        <button class="btn" type="button" data-preset="free">Solo gratis</button>
+        <button class="btn ghost" type="button" data-preset="none">Limpiar</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main id="catalog"></main>
+
+    <aside id="resumen" aria-live="polite">
+      <h2>Tu selección</h2>
+      <div class="total">
+        <span class="lbl">Costo total</span>
+        <span class="big" id="t-total">Q0</span>
+        <span class="fine" id="t-usd"></span>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="t-months">0</b><span>meses, en secuencia</span></div>
+        <div class="stat"><b id="t-monthly">Q0</b><span>pago mensual promedio</span></div>
+      </div>
+      <div id="t-alerts" class="grid" style="grid-template-columns:1fr;gap:8px"></div>
+      <ul class="lines" id="t-lines"></ul>
+      <p class="fine">Precios aproximados tomados de folletos y sitios oficiales en octubre de 2026. Libros CISSP a precio de lista en eCampus; clase de 5 días según Learners Ink; mentoría según Destination Certification; Pluralsight según su plan individual. *Los cursos de Udemy cambian de precio a menudo; US$20 es un estimado en oferta. Confirma con cada institución antes de pagar. No incluyen cuotas de graduación.</p>
+    </aside>
+  </div>
+</div>
+
+<div class="bar" aria-hidden="false">
+  <div><span class="fine">Total</span><br><b id="bar-total">Q0</b></div>
+  <a href="#resumen">Ver detalle</a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  // ---------- Catálogo ----------
+  // currency: 'Q' o 'USD'. months: duración estimada. group: exclusividad (no se combinan).
+  const GROUPS = [
+    { id:'maestrias', title:'Maestrías', hint:'Título de maestría completo' },
+    { id:'postgrados', title:'Postgrados', hint:'Un año, se puede cursar por separado' },
+    { id:'certs', title:'Certificaciones internacionales', hint:'Examen en dólares; elige cómo prepararte' },
+    { id:'tools', title:'Herramientas de estudio', hint:'Suscripciones que dan orden a tu estudio' },
+    { id:'free', title:'Cursos gratuitos', hint:'Para empezar sin gastar' }
+  ];
+  const ITEMS = [
+    { id:'galileo', cat:'maestrias', name:'Maestría en Ciberseguridad', prov:'Universidad Galileo (FISICC)', months:24, currency:'Q', price:67804, excl:'galileo',
+      tags:['Virtual','Prepara la CISSP'], note:'Dos postgrados: Seguridad Informática y Gerencia del Aseguramiento de la Información.',
+      breakdown:[['Inscripción trimestral (8 × Q1,758)',14064],['Cuota mensual (24 × Q2,175)',52200],['Seguro trimestral (8 × Q30)',240],['Servicios digitales GES (24 × Q50)',1200],['Carné anual (2 × Q50)',100]] },
+    { id:'unis', cat:'maestrias', name:'Maestría en Ciberseguridad', prov:'UNIS Virtual (Universidad del Istmo)', months:16, currency:'Q', price:43200, promo:27200, promoLabel:'Aplicar 40% de descuento en cuotas',
+      tags:['100% virtual','64 créditos'], note:'Incluye regulación, forense, hacking ético, IAM, SIEM y continuidad del negocio.',
+      breakdown:[['Matrícula (4 × Q800)',3200],['Cuotas regulares (16 × Q2,500)',40000]],
+      promoBreakdown:[['Matrícula (4 × Q800)',3200],['Cuotas con descuento (16 × Q1,500)',24000]] },
+    { id:'g-seg', cat:'postgrados', name:'Postgrado en Seguridad Informática', prov:'Universidad Galileo · año 1 de la maestría', months:12, currency:'Q', price:33902, excl:'galileo',
+      tags:['Técnico','Pentesting y forense'], note:'Sistemas operativos, pruebas de penetración, forense digital y redes inalámbricas.',
+      breakdown:[['Inscripción trimestral (4 × Q1,758)',7032],['Cuota mensual (12 × Q2,175)',26100],['Seguro trimestral (4 × Q30)',120],['Servicios GES (12 × Q50)',600],['Carné',50]] },
+    { id:'g-ger', cat:'postgrados', name:'Postgrado en Gerencia del Aseguramiento de la Información', prov:'Universidad Galileo · año 2 de la maestría', months:12, currency:'Q', price:33902, excl:'galileo',
+      tags:['Gerencial','CISSP I y II'], note:'Gobierno de TI, auditoría, cumplimiento, continuidad del negocio y preparación CISSP.',
+      breakdown:[['Inscripción trimestral (4 × Q1,758)',7032],['Cuota mensual (12 × Q2,175)',26100],['Seguro trimestral (4 × Q30)',120],['Servicios GES (12 × Q50)',600],['Carné',50]] },
+    { id:'az104', cat:'certs', name:'Azure Administrator (AZ-104)', prov:'Microsoft', months:3, currency:'USD', price:165, tags:['Nube','Asociado'],
+      note:'Precio del examen en EE. UU.; puede costar menos en Guatemala (revisa el precio por país en Microsoft Learn).',
+      prep:[
+        { id:'free', label:'Gratis', usd:0, solo:true, items:['Ruta oficial AZ-104 en Microsoft Learn, con laboratorios','Evaluación de práctica oficial de Microsoft','"AZ-104 Study Cram" de John Savill en YouTube','Cuenta gratuita de Azure para practicar'] },
+        { id:'practice', label:'Gratis + exámenes de práctica', usd:20, solo:true, items:['Todo lo gratuito','Exámenes de práctica en Udemy (6 pruebas, 330 preguntas), ≈ US$20 en oferta*'] },
+        { id:'plural', label:'Con plan guiado (Pluralsight)', usd:0, guided:true, needs:'pluralsight', items:['Ruta de aprendizaje con orden, videos y laboratorios en Pluralsight','Se paga una sola suscripción para AZ-104 y AZ-500 (ver Herramientas de estudio)','Más los recursos gratuitos de Microsoft'] }
+      ], prepDefault:'practice' },
+    { id:'az500', cat:'certs', name:'Azure Security Engineer (AZ-500)', prov:'Microsoft', months:3, currency:'USD', price:165, tags:['Nube','Seguridad'],
+      note:'Une nube y seguridad. El precio regional puede ser menor.',
+      prep:[
+        { id:'free', label:'Gratis', usd:0, solo:true, items:['Ruta oficial AZ-500 en Microsoft Learn, con laboratorios','Evaluación de práctica oficial de Microsoft','"AZ-500 Study Cram" de John Savill en YouTube'] },
+        { id:'practice', label:'Gratis + exámenes de práctica', usd:20, solo:true, items:['Todo lo gratuito','Exámenes de práctica en Udemy, ≈ US$20 en oferta*'] },
+        { id:'plural', label:'Con plan guiado (Pluralsight)', usd:0, guided:true, needs:'pluralsight', items:['Ruta de aprendizaje AZ-500 en Pluralsight, con laboratorios','Incluida en la misma suscripción del AZ-104'] }
+      ], prepDefault:'practice' },
+    { id:'cissp', cat:'certs', name:'CISSP', prov:'ISC2', months:6, currency:'USD', price:749, tags:['Gerencial','Más valorada'],
+      note:'Requiere 5 años de experiencia en 2 de 8 dominios. Mantenimiento: US$135 al año. Repetir el examen cuesta otros US$749.',
+      prep:[
+        { id:'used', label:'Libros usados + app gratis', usd:47, solo:true, items:['Study Guide y Practice Tests oficiales usados (eCampus), ≈ US$47','App gratuita de Destination Certification (1,700+ preguntas)','Mapas mentales gratis de Destination Certification','"CISSP Exam Cram" de Pete Zerger en YouTube'] },
+        { id:'books', label:'Libros oficiales nuevos', usd:121, solo:true, items:['ISC2 CISSP Official Study Guide, 10.ª ed. — US$74 (incluye banco de preguntas en línea de Wiley)','ISC2 CISSP Official Practice Tests, 4.ª ed. — US$47','App y mapas mentales gratis de Destination Certification'] },
+        { id:'bootcamp', label:'Clase en vivo de 5 días', usd:1399, guided:true, items:['Learners Ink: 40 horas en vivo por Zoom, 9 a 17 h, horario de Guatemala','Incluye libros oficiales ISC2, 1,500+ preguntas y mentor','US$1,399; con el código HOLIDAYS15 baja a ≈ US$1,189 hasta el 31/12/2026','Fechas: 14–18 dic 2026, 25–29 ene 2027, 22–26 feb 2027'] },
+        { id:'mentor', label:'Mentoría semanal por 1 año', usd:1771, guided:true, items:['Destination Certification MasterClass Essential — US$1,697','Mentoría grupal en vivo cada semana y plan de estudio personalizado','Se puede pagar en cuotas','+ Study Guide oficial nuevo — US$74'] }
+      ], prepDefault:'books' },
+    { id:'secplus', cat:'certs', name:'CompTIA Security+', prov:'CompTIA', months:3, currency:'USD', price:425, tags:['Fundamentos','Opcional'],
+      note:'Útil si una oferta de trabajo la pide.',
+      prep:[
+        { id:'free', label:'Gratis', usd:0, solo:true, items:['Curso completo en video de Professor Messer (SY0-701)','Grupo de estudio mensual en vivo de Professor Messer','Objetivos oficiales del examen de CompTIA'] },
+        { id:'practice', label:'Gratis + exámenes de práctica', usd:20, solo:true, items:['Todo lo gratuito','Exámenes de práctica en Udemy, ≈ US$20 en oferta*'] }
+      ], prepDefault:'practice' },
+    { id:'cc', cat:'certs', name:'Certified in Cybersecurity (CC)', prov:'ISC2', months:2, currency:'USD', price:199, tags:['Inicial'],
+      note:'ISC2 ofrecía capacitación y examen gratis; ese programa está en cierre. Confirma el precio vigente.',
+      prep:[ { id:'free', label:'Gratis', usd:0, solo:true, items:['Capacitación oficial en línea de ISC2 para el CC (confirma si sigue gratis)'] } ], prepDefault:'free' },
+    { id:'pluralsight', cat:'tools', name:'Pluralsight Core Tech (1 año)', prov:'Plataforma de cursos con rutas y laboratorios', months:0, currency:'USD', price:252, tags:['Plan guiado'],
+      note:'US$21 al mes pagando el año completo (US$30 si pagas mes a mes). Cubre AZ-104 y AZ-500 con una sola suscripción.' },
+    { id:'nac-ce', cat:'free', name:'Cybersecurity Essentials', prov:'Cisco Networking Academy', months:2, currency:'Q', price:0, tags:['En línea'] },
+    { id:'nac-eh', cat:'free', name:'Ethical Hacker', prov:'Cisco Networking Academy', months:2, currency:'Q', price:0, tags:['En línea'] },
+    { id:'mslearn', cat:'free', name:'Rutas de AZ-104 y AZ-500', prov:'Microsoft Learn', months:3, currency:'Q', price:0, tags:['En línea'],
+      note:'Los Virtual Training Days a veces regalan o descuentan el examen.' }
+  ];
+  const PRESETS = {
+    guided:  { sel:['az104','az500','cissp','pluralsight'], promo:true, prep:{ az104:'plural', az500:'plural', cissp:'mentor' } },
+    certs:   { sel:['az104','az500','cissp'], promo:true },
+    unis:    { sel:['unis','cissp'], promo:true },
+    galileo: { sel:['galileo','cissp'], promo:true, prep:{ cissp:'used' } },
+    free:    { sel:['nac-ce','nac-eh','mslearn'], promo:true },
+    none:    { sel:[], promo:true }
+  };
+
+  // ---------- Estado ----------
+  const KEY = 'presupuesto-ciber-v3';
+  const defPrep = () => Object.fromEntries(ITEMS.filter(i => i.prep).map(i => [i.id, i.prepDefault]));
+  let state = { sel: new Set(PRESETS.guided.sel), promo:{ unis:true }, prep: Object.assign(defPrep(), PRESETS.guided.prep), fx:7.70 };
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) { const s = JSON.parse(raw); state = { sel:new Set(s.sel||[]), promo:s.promo||{unis:true}, prep:Object.assign(defPrep(), s.prep||{}), fx:Number(s.fx)||7.70 }; }
+  } catch(_) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify({ sel:[...state.sel], promo:state.promo, prep:state.prep, fx:state.fx })); } catch(_) {} }
+
+  const fmtQ = (n) => 'Q' + Math.round(n).toLocaleString('es-GT');
+  const fmtUSD = (n) => 'US$' + Math.round(n).toLocaleString('es-GT');
+  const byId = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+
+  function examQ(it){
+    const base = (it.promo && state.promo[it.id]) ? it.promo : it.price;
+    return it.currency === 'USD' ? base * state.fx : base;
+  }
+  const prepOf = (it) => it.prep ? (it.prep.find(p => p.id === state.prep[it.id]) || it.prep[0]) : null;
+  const prepUsd = (it) => { const p = prepOf(it); return p ? p.usd : 0; };
+  const matQ = (it) => prepUsd(it) * state.fx;
+  const priceQ = (it) => examQ(it) + matQ(it);
+
+  // ---------- Catálogo ----------
+  const catalog = document.getElementById('catalog');
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  function priceHTML(it){
+    if (it.price === 0) return '<span class="price">Gratis</span>';
+    if (it.currency === 'USD') return `<span class="price">${fmtUSD(it.price)}</span>`;
+    if (it.promo && state.promo[it.id]) return `<span class="price"><s>${fmtQ(it.price)}</s>${fmtQ(it.promo)}</span>`;
+    return `<span class="price">${fmtQ(it.price)}</span>`;
+  }
+
+  const TIPS = `<section class="tips" aria-labelledby="h-tips">
+      <h2 id="h-tips">Si te cuesta estudiar por tu cuenta</h2>
+      <ol>
+        <li><b>Elige preparación con acompañamiento para la CISSP.</b> La mentoría semanal (Destination Certification, en inglés) te da un plan con fechas y alguien que revisa tu avance durante un año. La clase en vivo de 5 días sirve para un empujón final, pero después sigues solo.</li>
+        <li><b>Para Azure, usa una ruta guiada.</b> Pluralsight ordena el temario con videos y laboratorios, y los Microsoft Virtual Training Days son clases gratuitas en vivo con fecha fija.</li>
+        <li><b>Agenda el examen antes de empezar.</b> Ponle fecha a 10–12 semanas: tener un día fijo es la mejor motivación.</li>
+        <li><b>Estudia en bloques cortos y fijos.</b> 45 minutos, 5 días a la semana, a la misma hora. Rinde más que un sábado largo.</li>
+        <li><b>Busca compañeros.</b> Únete al grupo de estudio de la comunidad ISC2 o a los grupos en vivo de Professor Messer; estudiar con otros ayuda a no abandonar.</li>
+      </ol>
+    </section>`;
+
+  function renderCatalog(){
+    catalog.innerHTML = TIPS + GROUPS.map(g => {
+      const items = ITEMS.filter(i => i.cat === g.id);
+      return `<section class="group" aria-labelledby="h-${g.id}">
+        <h2 id="h-${g.id}">${g.title} <small>${g.hint}</small></h2>
+        <div class="grid">${items.map(itemHTML).join('')}</div>
+      </section>`;
+    }).join('');
+  }
+
+  function itemHTML(it){
+    const on = state.sel.has(it.id);
+    const tags = (it.tags||[]).map(t => `<span class="chip">${esc(t)}</span>`).join('');
+    const kind = it.price === 0 ? '<span class="chip free">Gratis</span>' : it.currency === 'USD' ? '<span class="chip usd">En dólares</span>' : '';
+    const dur = it.months ? `<span class="chip">${it.months} ${it.months === 1 ? 'mes' : 'meses'}</span>` : '';
+    const rows = (it.promo && state.promo[it.id]) ? it.promoBreakdown : it.breakdown;
+    const bd = rows ? `<details><summary>Ver desglose</summary><table><tbody>${rows.map(r => `<tr><td>${esc(r[0])}</td><td>${fmtQ(r[1])}</td></tr>`).join('')}</tbody></table></details>` : '';
+    const promo = it.promo ? `<label class="toggle"><input type="checkbox" id="promo-${it.id}" data-promo="${it.id}" ${state.promo[it.id] ? 'checked' : ''}>${esc(it.promoLabel)}</label>` : '';
+    const cur = prepOf(it);
+    const mat = it.prep ? `<fieldset class="mat">
+        <legend class="mat-h">¿Cómo te preparas?</legend>
+        ${it.prep.map(p => `<label class="opt ${p.id === cur.id ? 'is-on' : ''}">
+          <input type="radio" name="prep-${it.id}" id="prep-${it.id}-${p.id}" data-prep="${it.id}" value="${p.id}" ${p.id === cur.id ? 'checked' : ''}>
+          <span class="opt-t">${esc(p.label)}${p.guided ? ' <span class="chip guided">Con acompañamiento</span>' : ''}</span>
+          <span class="opt-p ${p.usd ? '' : 'free-t'}">${p.usd ? '+' + fmtUSD(p.usd) : (p.needs ? 'Suscripción aparte' : 'Gratis')}</span>
+        </label>`).join('')}
+        <ul>${cur.items.map(m => `<li>${esc(m)}</li>`).join('')}</ul>
+      </fieldset>` : '';
+    return `<article class="item ${on ? 'on' : ''}" data-card="${it.id}">
+      <label class="pick" for="sel-${it.id}">
+        <input class="sel" type="checkbox" id="sel-${it.id}" data-sel="${it.id}" ${on ? 'checked' : ''}>
+        <span><span class="name">${esc(it.name)}</span><br><span class="prov">${esc(it.prov)}</span></span>
+      </label>
+      <div class="meta">${kind}${dur}${tags}${priceHTML(it)}</div>
+      ${it.note ? `<p class="note">${esc(it.note)}</p>` : ''}
+      ${promo}${mat}${bd}
+    </article>`;
+  }
+
+  // ---------- Resumen ----------
+  function renderSummary(){
+    const sel = ITEMS.filter(i => state.sel.has(i.id));
+    let total = 0, usd = 0, months = 0;
+    let matUsd = 0;
+    sel.forEach(i => { total += priceQ(i); months += i.months || 0; if (i.currency === 'USD') usd += i.price; matUsd += prepUsd(i); });
+
+    document.getElementById('t-total').textContent = fmtQ(total);
+    document.getElementById('bar-total').textContent = fmtQ(total);
+    const parts = [];
+    if (usd) parts.push(`${fmtUSD(usd)} en exámenes y suscripciones`);
+    if (matUsd) parts.push(`${fmtUSD(matUsd)} en preparación`);
+    document.getElementById('t-usd').textContent = parts.length ? `Incluye ${parts.join(' y ')}, a Q${state.fx.toFixed(2)} por dólar.` : '';
+    document.getElementById('t-months').textContent = months;
+    document.getElementById('t-monthly').textContent = months ? fmtQ(total / months) : 'Q0';
+
+    const lines = document.getElementById('t-lines');
+    lines.innerHTML = sel.length
+      ? sel.map(i => `<li><span>${esc(i.name)}${prepUsd(i) ? `<br><small class="sub">Examen ${fmtQ(examQ(i))} + ${esc(prepOf(i).label.toLowerCase())} ${fmtQ(matQ(i))}</small>` : ''}<br><button class="rm" type="button" data-remove="${i.id}">Quitar</button></span><span>${i.price === 0 ? 'Gratis' : fmtQ(priceQ(i))}</span></li>`).join('')
+      : '<li class="empty" style="border:0;display:block">Aún no eliges nada. Marca una opción del catálogo o usa una ruta sugerida.</li>';
+
+    const alerts = [];
+    const g = ['galileo','g-seg','g-ger'].filter(id => state.sel.has(id));
+    if (state.sel.has('galileo') && g.length > 1) alerts.push('La maestría de Galileo ya incluye los dos postgrados; no los sumes por separado.');
+    if (state.sel.has('galileo') && state.sel.has('unis')) alerts.push('Elegiste dos maestrías. Normalmente se cursa solo una.');
+    if (state.sel.has('cissp') && prepUsd(byId.cissp) > 100 && (state.sel.has('galileo') || state.sel.has('g-ger'))) alerts.push('El programa de Galileo ya prepara la CISSP; con libros usados y la app gratis te basta.');
+    const needPs = ['az104','az500'].some(id => state.sel.has(id) && prepOf(byId[id]).needs);
+    if (needPs && !state.sel.has('pluralsight')) alerts.push('Elegiste el plan guiado de Pluralsight: marca también la suscripción en Herramientas de estudio.');
+    if (state.sel.has('cissp')) alerts.push('La CISSP cobra además unos US$135 al año de mantenimiento.');
+    document.getElementById('t-alerts').innerHTML = alerts.map(a => `<div class="alert">${esc(a)}</div>`).join('');
+  }
+
+  function render(){ renderCatalog(); renderSummary(); }
+
+  // ---------- Eventos ----------
+  document.addEventListener('change', (e) => {
+    const s = e.target.dataset.sel, p = e.target.dataset.promo, m = e.target.dataset.prep;
+    if (m) {
+      state.prep[m] = e.target.value;
+      if (!state.sel.has(m)) state.sel.add(m);
+      render(); save();
+      const el = document.getElementById(`prep-${m}-${e.target.value}`); if (el) el.focus();
+    } else if (s) {
+      e.target.checked ? state.sel.add(s) : state.sel.delete(s);
+      const card = document.querySelector(`[data-card="${s}"]`);
+      if (card) card.classList.toggle('on', e.target.checked);
+      renderSummary(); save();
+    } else if (p) {
+      state.promo[p] = e.target.checked;
+      render(); save();
+      const el = document.getElementById('promo-' + p); if (el) el.focus();
+    } else if (e.target.id === 'fx') {
+      const v = parseFloat(e.target.value);
+      if (v > 0) { state.fx = v; renderSummary(); save(); }
+    }
+  });
+  document.getElementById('fx').addEventListener('input', (e) => {
+    const v = parseFloat(e.target.value);
+    if (v > 0) { state.fx = v; renderSummary(); save(); }
+  });
+  document.addEventListener('click', (e) => {
+    const pr = e.target.closest('[data-preset]');
+    if (pr) {
+      const P = PRESETS[pr.dataset.preset];
+      state.sel = new Set(P.sel); state.promo.unis = P.promo;
+      state.prep = Object.assign(defPrep(), P.prep || {});
+      render(); save(); return;
+    }
+    const rm = e.target.closest('[data-remove]');
+    if (rm) { state.sel.delete(rm.dataset.remove); render(); save(); }
+  });
+
+  document.getElementById('fx').value = state.fx.toFixed(2);
+  render();
+})();
+</script>
+
+</body></html>
