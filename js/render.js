@@ -258,7 +258,7 @@
     const el = $('#links-groups');
     if (!el) return;
     const groups = [];
-    list.forEach((v) => {
+    list.filter((v) => v.oculto !== 'si' && v.oculto !== true).forEach((v) => {
       const g = pick(v.grupo) || '';
       let group = groups.find((x) => x.name === g);
       if (!group) { group = { name: g, items: [] }; groups.push(group); }

@@ -7,7 +7,7 @@
  */
 window.CV_DEFAULT_DATA = {
   "version": 2,
-  "updatedAt": "2026-11-18T09:35:04.000Z",
+  "updatedAt": "2026-11-18T09:49:00.000Z",
   "personal": {
     "nombre": "Víctor Manuel Estrada Funes",
     "titulo": {
@@ -760,7 +760,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Career history, recommendations and network."
       },
       "url": "https://www.linkedin.com/in/estradafunes/",
-      "icono": "fab fa-linkedin-in"
+      "icono": "fab fa-linkedin-in",
+      "oculto": ""
     },
     {
       "grupo": {
@@ -776,7 +777,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Verifiable badges and certifications."
       },
       "url": "https://www.credly.com/users/victor-estrada.2114d8cf",
-      "icono": "fas fa-award"
+      "icono": "fas fa-award",
+      "oculto": ""
     },
     {
       "grupo": {
@@ -792,7 +794,8 @@ window.CV_DEFAULT_DATA = {
         "en": "This portfolio, with PDF export in Spanish and English."
       },
       "url": "https://portafolio.rompecabezas.online/",
-      "icono": "fas fa-id-card"
+      "icono": "fas fa-id-card",
+      "oculto": ""
     },
     {
       "grupo": {
@@ -808,7 +811,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Jigsaw puzzles from 100 to 9,000 pieces, 3D puzzles and accessories."
       },
       "url": "https://shop.rompecabezas.online/",
-      "icono": "fas fa-puzzle-piece"
+      "icono": "fas fa-puzzle-piece",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -824,7 +828,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Technology, home, beauty, tools and more."
       },
       "url": "https://tech.rompecabezas.online/",
-      "icono": "fas fa-microchip"
+      "icono": "fas fa-microchip",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -840,7 +845,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Luggage, backpacks and travel accessories."
       },
       "url": "https://ekipro.rompecabezas.online/",
-      "icono": "fas fa-suitcase-rolling"
+      "icono": "fas fa-suitcase-rolling",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -856,7 +862,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Storage, hardware, carpentry and salon furniture."
       },
       "url": "https://organizagt.rompecabezas.online/",
-      "icono": "fas fa-layer-group"
+      "icono": "fas fa-layer-group",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -872,7 +879,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Kitchenware for homes, restaurants and hotels."
       },
       "url": "https://guatecocina.com/",
-      "icono": "fas fa-fire-burner"
+      "icono": "fas fa-fire-burner",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -888,7 +896,8 @@ window.CV_DEFAULT_DATA = {
         "en": "Glassware, tableware, baking, coffee and bar supplies."
       },
       "url": "https://miika.rompecabezas.online/",
-      "icono": "fas fa-mug-hot"
+      "icono": "fas fa-mug-hot",
+      "oculto": "si"
     },
     {
       "grupo": {
@@ -904,7 +913,8 @@ window.CV_DEFAULT_DATA = {
         "en": "3D printing, keychains, décor and custom designs."
       },
       "url": "https://guate3d.rompecabezas.online/",
-      "icono": "fas fa-cube"
+      "icono": "fas fa-cube",
+      "oculto": "si"
     }
   ]
 };

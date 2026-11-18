@@ -105,13 +105,14 @@
   LISTS.vinculos = {
     title: 'Vínculos',
     itemName: 'vínculo',
-    summary: (it) => [it.nombre && it.nombre.es, it.grupo && it.grupo.es].filter(Boolean).join(' · '),
+    summary: (it) => [it.nombre && it.nombre.es, it.grupo && it.grupo.es, it.oculto === 'si' ? '(oculto)' : ''].filter(Boolean).join(' · '),
     fields: [
       F.bi('nombre', 'Nombre', { required: true }),
       F.bi('grupo', 'Grupo', { help: 'Los vínculos con el mismo grupo se muestran juntos. Ej.: «Mis negocios en línea».' }),
       F.bi('descripcion', 'Descripción'),
       F.text('url', 'Dirección (URL)', { half: true, required: true, inputType: 'url' }),
-      F.text('icono', 'Ícono (Font Awesome)', { half: true, help: 'Ej.: fas fa-cube, fab fa-github. Lista en fontawesome.com/icons' })
+      F.text('icono', 'Ícono (Font Awesome)', { half: true, help: 'Ej.: fas fa-cube, fab fa-github. Lista en fontawesome.com/icons' }),
+      { key: 'oculto', label: 'Mostrar en la página', type: 'select', half: true, options: [['', 'Visible'], ['si', 'Oculto']] }
     ],
     blank: () => ({ nombre: { es: '', en: '' }, grupo: { es: 'Mis negocios en línea', en: 'My online businesses' }, descripcion: { es: '', en: '' }, url: 'https://', icono: 'fas fa-link' })
   };
