@@ -65,11 +65,13 @@
   document.getElementById('btn-lang').addEventListener('click', () => {
     window.I18n.toggle();
     render();
+    paintThemeButton();
     setMenu(false);
   });
 
   // ---------- foto: si no carga, se muestran iniciales ----------
-  document.getElementById('user-img').addEventListener('error', (e) => {
+  const userImg = document.getElementById('user-img');
+  if (userImg) userImg.addEventListener('error', (e) => {
     e.target.closest('.profile-photo').classList.add('is-missing');
   });
 
@@ -96,7 +98,7 @@
 
   // ---------- PDF ----------
   const pdfBtn = document.getElementById('btn-pdf');
-  pdfBtn.addEventListener('click', async () => {
+  if (pdfBtn) pdfBtn.addEventListener('click', async () => {
     setMenu(false);
     const label = pdfBtn.querySelector('span');
     pdfBtn.disabled = true;
@@ -130,5 +132,64 @@
     if (e.key === window.CVStore.STORAGE_KEY) { data = window.CVStore.load(); render(); }
   });
 
+  // ---------- tema claro / oscuro ----------
+  const themeBtn = document.getElementById('btn-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function currentTheme() {
+    return document.documentElement.dataset.theme || (prefersDark.matches ? 'dark' : 'light');
+  }
+  function paintThemeButton() {
+    if (!themeBtn) return;
+    const dark = currentTheme() === 'dark';
+    themeBtn.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    themeBtn.dataset.i18nAria = dark ? 'themeToLight' : 'themeToDark';
+    themeBtn.setAttribute('aria-label', t(themeBtn.dataset.i18nAria));
+    themeBtn.setAttribute('title', t(themeBtn.dataset.i18nAria));
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', dark ? '#0b0f19' : '#f6f8fc');
+  }
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const next = currentTheme() === 'dark' ? 'light' : 'dark';
+      const apply = () => {
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('cv_theme', next); } catch (_) {}
+        paintThemeButton();
+      };
+      if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.startViewTransition(apply);
+      } else apply();
+    });
+    prefersDark.addEventListener('change', paintThemeButton);
+  }
+
+  // ---------- barra de progreso de lectura y botón "volver arriba" ----------
+  const progress = document.getElementById('scroll-progress');
+  const backTop = document.getElementById('back-top');
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? window.scrollY / max : 0;
+    if (progress) progress.style.transform = `scaleX(${ratio})`;
+    if (backTop) backTop.classList.toggle('is-visible', window.scrollY > 600);
+    document.body.classList.toggle('is-scrolled', window.scrollY > 8);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  if (backTop) backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ---------- aparición suave de las secciones al hacer scroll ----------
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    const revealIo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealIo.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => revealIo.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+  }
+
   render();
+  paintThemeButton();
+  onScroll();
 })();

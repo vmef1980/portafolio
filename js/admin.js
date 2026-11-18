@@ -60,23 +60,74 @@
         F.bi('emisor', 'Emisor / descripción'),
         F.text('anio', 'Año', { half: true }),
         { key: 'estilo', label: 'Estilo de tarjeta', type: 'select', half: true,
-          options: [['normal', 'Normal'], ['destacada', 'Destacada (ancho completo, azul)'], ['azul', 'Acento azul'], ['verde', 'Acento verde']] },
+          options: [['normal', 'Normal'], ['destacada', 'Destacada (ancho completo, azul)'], ['azul', 'Acento azul'], ['verde', 'Acento verde'], ['progreso', 'En curso (ámbar, con insignia «En curso»)']] },
+        F.bi('estado', 'Estado (opcional)', { help: 'Ej.: «En preparación · examen dic. 2026». Al aprobar, déjalo vacío, cambia el estilo y agrega el ID.' }),
         F.text('verificacionId', 'ID de verificación', { half: true, help: 'Se muestra con botón «Copiar ID».' }),
         F.text('verificacionUrl', 'URL de verificación', { half: true, inputType: 'url', help: 'Muestra el botón «Verificar».' })
       ],
-      blank: () => ({ nombre: { es: '', en: '' }, emisor: { es: '', en: '' }, anio: String(new Date().getFullYear()), estilo: 'normal', verificacionId: '', verificacionUrl: '' })
+      blank: () => ({ nombre: { es: '', en: '' }, emisor: { es: '', en: '' }, anio: String(new Date().getFullYear()), estilo: 'normal', estado: { es: '', en: '' }, verificacionId: '', verificacionUrl: '' })
     }
+  };
+
+  LISTS.educacion = {
+    title: 'Educación',
+    itemName: 'estudio',
+    summary: (it) => [it.titulo && it.titulo.es, it.institucion && it.institucion.es].filter(Boolean).join(' · '),
+    fields: [
+      F.bi('titulo', 'Título o grado', { required: true }),
+      F.bi('institucion', 'Institución'),
+      F.bi('detalle', 'Detalle', { help: 'Ej.: «Graduado en 2023» o «Admitido · inicio enero 2027».' }),
+      { key: 'estado', label: 'Estado', type: 'select', half: true, options: [['', 'Terminado'], ['progreso', 'En curso (insignia «En curso»)']] }
+    ],
+    blank: () => ({ titulo: { es: '', en: '' }, institucion: { es: '', en: '' }, detalle: { es: '', en: '' }, estado: '' })
+  };
+  LISTS.cursos = {
+    title: 'Formación complementaria',
+    itemName: 'curso',
+    summary: (it) => [typeof it.nombre === 'string' ? it.nombre : it.nombre && it.nombre.es, it.fecha && it.fecha.es].filter(Boolean).join(' · '),
+    fields: [
+      F.text('nombre', 'Nombre del curso', { required: true }),
+      F.bi('institucion', 'Institución y lugar'),
+      F.bi('fecha', 'Fecha', { help: 'Ej.: «Marzo 2016» / «March 2016».' })
+    ],
+    blank: () => ({ nombre: '', institucion: { es: '', en: '' }, fecha: { es: '', en: '' } })
+  };
+  LISTS.indicadores = {
+    title: 'Indicadores',
+    itemName: 'indicador',
+    summary: (it) => [it.valor, it.etiqueta && it.etiqueta.es].filter(Boolean).join(' '),
+    fields: [
+      F.text('valor', 'Cifra', { half: true, required: true, help: 'Ej.: 25+' }),
+      F.bi('etiqueta', 'Texto', { required: true })
+    ],
+    blank: () => ({ valor: '', etiqueta: { es: '', en: '' } })
+  };
+  LISTS.vinculos = {
+    title: 'Vínculos',
+    itemName: 'vínculo',
+    summary: (it) => [it.nombre && it.nombre.es, it.grupo && it.grupo.es].filter(Boolean).join(' · '),
+    fields: [
+      F.bi('nombre', 'Nombre', { required: true }),
+      F.bi('grupo', 'Grupo', { help: 'Los vínculos con el mismo grupo se muestran juntos. Ej.: «Mis negocios en línea».' }),
+      F.bi('descripcion', 'Descripción'),
+      F.text('url', 'Dirección (URL)', { half: true, required: true, inputType: 'url' }),
+      F.text('icono', 'Ícono (Font Awesome)', { half: true, help: 'Ej.: fas fa-cube, fab fa-github. Lista en fontawesome.com/icons' })
+    ],
+    blank: () => ({ nombre: { es: '', en: '' }, grupo: { es: 'Mis negocios en línea', en: 'My online businesses' }, descripcion: { es: '', en: '' }, url: 'https://', icono: 'fas fa-link' })
   };
 
   const PERSONAL = [
     F.text('personal.nombre', 'Nombre completo', { required: true }),
+    F.bi('personal.titular', 'Cargo o titular (encabezado del PDF)'),
     F.bi('personal.titulo', 'Título profesional', { required: true }),
+    F.bi('personal.especialidad', 'Especialidades (línea bajo el titular)'),
     F.text('personal.colegiado', 'Número de colegiado', { half: true }),
     F.text('personal.telefono', 'Teléfono (también se usa para WhatsApp)', { half: true, required: true, help: 'Incluye el código de país: (502) …' }),
     F.text('personal.correo', 'Correo electrónico', { half: true, required: true, inputType: 'email' }),
     F.bi('personal.ubicacion', 'Ubicación'),
     F.text('personal.linkedin', 'LinkedIn', { half: true, inputType: 'url' }),
     F.text('personal.credly', 'Credly', { half: true, inputType: 'url' }),
+    F.text('personal.sitio', 'Sitio web (aparece en el PDF)', { half: true, inputType: 'url' }),
     F.biArea('personal.mensajeWhatsApp', 'Mensaje inicial de WhatsApp'),
     F.text('personal.favicon', 'Ruta del favicon', { half: true, help: 'Ej.: img/perfil.ico' })
   ];
@@ -151,6 +202,11 @@
       `<div class="fields">${PERSONAL.map((d) => fieldHtml(d)).join('')}</div>`;
     const perfilDef = F.biArea('perfil', 'Descripción del perfil', { required: true });
     document.getElementById('perfil-fields').innerHTML = fieldHtml(perfilDef);
+    const extra = document.getElementById('extra-fields');
+    if (extra) {
+      extra.innerHTML = fieldHtml(F.biLines('idiomas', 'Idiomas', { help: 'Un idioma por renglón, con el nivel después de «·». Ej.: Inglés · avanzado' })) +
+        fieldHtml(F.biLines('competenciasClave', 'Competencias clave (barra lateral del PDF)', { help: 'Una por renglón.' }));
+    }
     updatePhotoPreview();
   }
 

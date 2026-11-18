@@ -4,18 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Víctor Manuel Estrada Funes | CV y Consultoría</title>
-    <meta name="description" content="Currículum de Víctor Manuel Estrada Funes: infraestructura de TI, centros de datos, continuidad del negocio y automatización.">
+    <meta name="description" content="Currículum de Víctor Manuel Estrada Funes: infraestructura de TI, centros de datos, continuidad del negocio, ciberseguridad y automatización.">
     <meta name="theme-color" content="#0b0f19">
+    <meta name="color-scheme" content="dark light">
     <link rel="icon" href="img/perfil.ico" id="dynamic-favicon">
+    <link rel="canonical" href="https://portafolio.rompecabezas.online/">
+    <link rel="alternate" hreflang="es" href="https://portafolio.rompecabezas.online/">
+    <link rel="alternate" hreflang="en" href="https://portafolio.rompecabezas.online/?lang=en">
+
+    <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp, Facebook, X) -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://portafolio.rompecabezas.online/">
+    <meta property="og:title" content="Víctor Manuel Estrada Funes | Ingeniero Sénior de Infraestructura">
+    <meta property="og:description" content="Más de 25 años en centros de datos, continuidad del negocio, nube y ciberseguridad para banca y empresas multinacionales.">
+    <meta property="og:image" content="https://portafolio.rompecabezas.online/img/perfil.jpg">
+    <meta property="og:locale" content="es_GT">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Tema guardado: se aplica antes de pintar para evitar parpadeo -->
+    <script>try{var th=localStorage.getItem('cv_theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;}catch(e){}</script>
+
+    <!-- Datos estructurados para buscadores (el contenido visible se genera con JavaScript) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Víctor Manuel Estrada Funes",
+      "jobTitle": "Ingeniero Sénior de Infraestructura",
+      "url": "https://portafolio.rompecabezas.online/",
+      "image": "https://portafolio.rompecabezas.online/img/perfil.jpg",
+      "email": "mailto:vmef1980@gmail.com",
+      "telephone": "+50256942222",
+      "address": { "@type": "PostalAddress", "addressLocality": "Ciudad de Guatemala", "addressCountry": "GT" },
+      "worksFor": { "@type": "Organization", "name": "Conduent Business de Guatemala, S.A." },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "Universidad Galileo" },
+        { "@type": "EducationalOrganization", "name": "Centro Educativo Técnico Laboral Kinal" }
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "Licenciatura en Tecnología y Administración de las Telecomunicaciones", "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Universidad Galileo" } }
+      ],
+      "knowsLanguage": ["es", "en"],
+      "knowsAbout": ["Centros de datos", "Continuidad del negocio", "Recuperación ante desastres", "Microsoft Azure", "Ciberseguridad", "Redes Cisco", "Automatización de TI"],
+      "sameAs": [
+        "https://www.linkedin.com/in/estradafunes/",
+        "https://www.credly.com/users/victor-estrada.2114d8cf"
+      ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body data-page="cv">
     <a class="skip-link" href="#main" data-i18n="skipLink">Saltar al contenido</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="bg-mesh" aria-hidden="true"></div>
 
     <header class="site-header">
         <div class="nav-container">
@@ -27,14 +75,21 @@
                 <a href="#perfil" data-i18n="navPerfil">Perfil</a>
                 <a href="#servicios" data-i18n="navServicios">Servicios</a>
                 <a href="#experiencia" data-i18n="navExperiencia">Experiencia</a>
+                <a href="#educacion" data-i18n="navEducacion">Educación</a>
                 <a href="#habilidades" data-i18n="navHabilidades">Habilidades</a>
                 <a href="#certificaciones" data-i18n="navCertificaciones">Certificaciones</a>
-                <button class="btn-header btn-pdf" id="btn-pdf" type="button">
-                    <i class="fas fa-file-pdf" aria-hidden="true"></i><span data-i18n="btnPdf">Exportar PDF</span>
-                </button>
-                <button class="btn-header btn-lang" id="btn-lang" type="button">
-                    <i class="fas fa-language" aria-hidden="true"></i><span data-i18n="btnLang">English</span>
-                </button>
+                <a href="vinculos.html" data-i18n="navVinculos">Vínculos</a>
+                <div class="nav-actions">
+                    <button class="btn-header btn-pdf" id="btn-pdf" type="button">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i><span data-i18n="btnPdf">Exportar PDF</span>
+                    </button>
+                    <button class="btn-header btn-lang" id="btn-lang" type="button">
+                        <i class="fas fa-language" aria-hidden="true"></i><span data-i18n="btnLang">English</span>
+                    </button>
+                    <button class="btn-header btn-icon" id="btn-theme" type="button" data-i18n-aria="themeToLight" aria-label="Cambiar tema">
+                        <i class="fas fa-sun" aria-hidden="true"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -42,9 +97,11 @@
     <main id="main">
         <section class="hero" id="top">
             <div class="hero-info">
+                <p class="eyebrow" id="hero-eyebrow" hidden></p>
                 <h1 id="hero-name">Víctor Manuel Estrada Funes</h1>
                 <p class="subtitle" id="hero-title"></p>
                 <p><span class="colegiado" id="hero-colegiado"></span></p>
+                <ul class="hero-chips" id="hero-chips"></ul>
                 <ul class="contact-grid" id="contact-grid"></ul>
             </div>
             <div class="profile-photo spotlight">
@@ -53,36 +110,64 @@
             </div>
         </section>
 
-        <section id="perfil" class="section">
+        <div class="stats reveal" id="stats" hidden></div>
+
+        <section id="perfil" class="section reveal">
             <h2 data-i18n="secPerfil">Perfil profesional</h2>
             <p class="profile-text" id="perfil-text"></p>
         </section>
 
-        <section id="servicios" class="section">
+        <section id="servicios" class="section reveal">
             <h2 data-i18n="secServicios">Servicios de consultoría e infraestructura</h2>
             <div class="services-grid" id="services-grid"></div>
         </section>
 
-        <section id="experiencia" class="section">
+        <section id="experiencia" class="section reveal">
             <h2 data-i18n="secExperiencia">Experiencia profesional</h2>
             <div class="timeline" id="timeline"></div>
         </section>
 
-        <section id="habilidades" class="section">
+        <section id="educacion" class="section reveal">
+            <h2 data-i18n="secEducacion">Educación</h2>
+            <div class="edu-grid" id="edu-grid"></div>
+            <div class="langs">
+                <h3 class="subhead" data-i18n="secIdiomas">Idiomas</h3>
+                <ul class="lang-list" id="lang-list"></ul>
+            </div>
+        </section>
+
+        <section id="habilidades" class="section reveal">
             <h2 data-i18n="secHabilidades">Competencias técnicas</h2>
             <div class="skills-grid" id="skills-grid"></div>
         </section>
 
-        <section id="certificaciones" class="section">
+        <section id="certificaciones" class="section reveal">
             <h2 data-i18n="secCertificaciones">Certificaciones destacadas</h2>
             <div class="cert-list" id="cert-list"></div>
+
+            <details class="courses" id="courses" hidden>
+                <summary>
+                    <span class="courses__title" data-i18n="secCursos">Formación complementaria</span>
+                    <span class="courses__summary" id="courses-summary"></span>
+                    <i class="fas fa-chevron-down courses__chev" aria-hidden="true"></i>
+                </summary>
+                <ul class="courses__list" id="courses-list"></ul>
+            </details>
         </section>
     </main>
 
     <footer class="site-footer">
+        <nav class="footer-links" aria-label="Enlaces">
+            <a href="vinculos.html"><i class="fas fa-link" aria-hidden="true"></i><span data-i18n="footerVinculos">Vínculos</span></a>
+            <a href="https://www.linkedin.com/in/estradafunes/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i>LinkedIn</a>
+            <a href="https://www.credly.com/users/victor-estrada.2114d8cf" target="_blank" rel="noopener noreferrer"><i class="fas fa-award" aria-hidden="true"></i>Credly</a>
+        </nav>
         <p id="footer-text"></p>
     </footer>
 
+    <button class="back-top" id="back-top" type="button" data-i18n-aria="backTop" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>

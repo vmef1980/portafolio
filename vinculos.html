@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vínculos | Víctor Manuel Estrada Funes</title>
+    <meta name="description" content="Perfiles profesionales y negocios en línea de Víctor Manuel Estrada Funes.">
+    <meta name="theme-color" content="#0b0f19">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="img/perfil.ico" id="dynamic-favicon">
+    <link rel="canonical" href="https://portafolio.rompecabezas.online/vinculos.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://portafolio.rompecabezas.online/vinculos.html">
+    <meta property="og:title" content="Vínculos | Víctor Manuel Estrada Funes">
+    <meta property="og:description" content="Perfiles profesionales y negocios en línea de Víctor Manuel Estrada Funes.">
+    <meta property="og:image" content="https://portafolio.rompecabezas.online/img/perfil.jpg">
+    <meta name="twitter:card" content="summary">
+
+    <script>try{var th=localStorage.getItem('cv_theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;}catch(e){}</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body data-page="vinculos">
+    <a class="skip-link" href="#main" data-i18n="skipLink">Saltar al contenido</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="bg-mesh" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="nav-container">
+            <a class="logo" href="index.html" aria-label="Inicio">Victor<span>Estrada</span></a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="navbar" aria-expanded="false" aria-label="Abrir menú">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <nav id="navbar" class="navbar">
+                <a href="index.html#perfil" data-i18n="navPerfil">Perfil</a>
+                <a href="index.html#experiencia" data-i18n="navExperiencia">Experiencia</a>
+                <a href="index.html#educacion" data-i18n="navEducacion">Educación</a>
+                <a href="index.html#certificaciones" data-i18n="navCertificaciones">Certificaciones</a>
+                <a href="vinculos.html" class="is-active" aria-current="page" data-i18n="navVinculos">Vínculos</a>
+                <div class="nav-actions">
+                    <button class="btn-header btn-lang" id="btn-lang" type="button">
+                        <i class="fas fa-language" aria-hidden="true"></i><span data-i18n="btnLang">English</span>
+                    </button>
+                    <button class="btn-header btn-icon" id="btn-theme" type="button" data-i18n-aria="themeToLight" aria-label="Cambiar tema">
+                        <i class="fas fa-sun" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="links-hero">
+            <p class="eyebrow" data-i18n="linksEyebrow">Vínculos</p>
+            <h1 data-i18n="linksTitle">Mis perfiles y proyectos</h1>
+            <p class="links-hero__lead" data-i18n="linksLead"></p>
+            <a class="btn-cta" href="index.html"><i class="fas fa-id-card" aria-hidden="true"></i><span data-i18n="linksBack">Ver mi CV</span></a>
+        </section>
+
+        <div id="links-groups" class="links-groups"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p id="footer-text"></p>
+    </footer>
+
+    <button class="back-top" id="back-top" type="button" data-i18n-aria="backTop" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/data.js" defer></script>
+    <script src="js/store.js" defer></script>
+    <script src="js/i18n.js" defer></script>
+    <script src="js/render.js" defer></script>
+    <script src="js/cursor.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
