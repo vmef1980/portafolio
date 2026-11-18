@@ -7,7 +7,7 @@
  */
 window.CV_DEFAULT_DATA = {
   "version": 2,
-  "updatedAt": "2026-11-18T09:00:00.000Z",
+  "updatedAt": "2026-11-18T09:25:00.000Z",
   "personal": {
     "nombre": "Víctor Manuel Estrada Funes",
     "titulo": {
@@ -299,7 +299,7 @@ window.CV_DEFAULT_DATA = {
     {
       "titulo": {
         "es": "Perito y Bachiller en Computación",
-        "en": "Computer Science Technical Diploma"
+        "en": "Technical High School Diploma in Computer Science (Perito y Bachiller en Computación)"
       },
       "institucion": {
         "es": "Centro Educativo Técnico Laboral Kinal",
