@@ -7,7 +7,7 @@
  */
 window.CV_DEFAULT_DATA = {
   "version": 2,
-  "updatedAt": "2026-11-18T09:25:00.000Z",
+  "updatedAt": "2026-11-18T09:35:04.000Z",
   "personal": {
     "nombre": "Víctor Manuel Estrada Funes",
     "titulo": {
