@@ -7,7 +7,7 @@
  */
 window.CV_DEFAULT_DATA = {
   "version": 2,
-  "updatedAt": "2026-11-18T09:49:00.000Z",
+  "updatedAt": "2026-11-19T02:57:39.000Z",
   "personal": {
     "nombre": "Víctor Manuel Estrada Funes",
     "titulo": {
@@ -83,8 +83,8 @@ window.CV_DEFAULT_DATA = {
       },
       "empresa": "Conduent Business de Guatemala, S.A.",
       "nota": {
-        "es": "(antes Xerox de Guatemala, S.A.)",
-        "en": "(formerly Xerox de Guatemala, S.A.)"
+        "es": "(antes Xerox de Guatemala, S.A.) · multinacional con presencia en 24 países",
+        "en": "(formerly Xerox de Guatemala, S.A.) · multinational operating in 24 countries"
       },
       "periodo": {
         "es": "2013 – Actualidad",
@@ -92,13 +92,13 @@ window.CV_DEFAULT_DATA = {
       },
       "logros": {
         "es": [
-          "Administración integral y soporte global de centros de datos locales y remotos, asegurando la continuidad operativa en entornos críticos.",
+          "Administración integral y soporte global de centros de datos locales y remotos desde la sede de Guatemala, una de las operaciones internacionales más grandes y antiguas de Conduent, que atiende a clientes de todo el mundo.",
           "Liderazgo de proyectos globales de infraestructura, migraciones de sistemas complejos y esquemas de seguridad informática.",
           "Automatización de procesos operativos, manteniendo alta estabilidad ante múltiples transiciones corporativas.",
           "Participación en iniciativas de migración, respaldo y protección de la información, con enfoque en optimización de procesos y modernización tecnológica."
         ],
         "en": [
-          "Comprehensive management and global support of local and remote data centers, ensuring operational continuity in critical environments.",
+          "End-to-end administration and global support of local and remote data centers from the Guatemala site, one of Conduent's largest and longest-standing international operations, serving clients worldwide.",
           "Leadership of global infrastructure projects, complex system migrations and information security frameworks.",
           "Automation of operational processes, maintaining high stability through multiple corporate transitions.",
           "Contribution to migration, backup and information protection initiatives, focused on process optimization and technology modernization."

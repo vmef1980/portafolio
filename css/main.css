@@ -39,19 +39,7 @@
     color-scheme: dark;
 }
 
-/* Tema claro: por preferencia del sistema o elegido con el botón */
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']) {
-        --bg: #f6f8fc; --bg-2: #eef2f9; --card-bg: #ffffff; --card-bg-2: #f4f7fd;
-        --surface-glass: rgba(255, 255, 255, 0.72);
-        --heading: #0b1220; --text-primary: #1f2937; --text-secondary: #556274;
-        --accent: #2563eb; --accent-hover: #1d4ed8; --accent-soft: rgba(37, 99, 235, 0.08); --accent-glow: rgba(37, 99, 235, 0.22);
-        --accent-2: #0891b2; --green: #059669; --amber: #b45309; --amber-soft: rgba(217, 119, 6, 0.1);
-        --border: #e2e8f0; --border-strong: #cbd5e1; --header-bg: rgba(246, 248, 252, 0.78);
-        --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        color-scheme: light;
-    }
-}
+/* Tema claro: solo si el visitante lo elige con el botón (por defecto el sitio es oscuro) */
 :root[data-theme='light'] {
     --bg: #f6f8fc; --bg-2: #eef2f9; --card-bg: #ffffff; --card-bg-2: #f4f7fd;
     --surface-glass: rgba(255, 255, 255, 0.72);
@@ -171,6 +159,19 @@ p { text-wrap: pretty; }
     border: 1px solid var(--border-strong);
 }
 .btn-icon:hover { color: var(--accent); border-color: var(--accent); transform: rotate(-12deg); }
+
+/* Selector de idioma ES | EN: el idioma activo se resalta */
+.lang-opt { opacity: 0.55; transition: opacity 0.2s; }
+.lang-sep { opacity: 0.45; margin: 0 0.1rem; }
+html[lang='es'] .lang-opt[data-lang='es'], html[lang='en'] .lang-opt[data-lang='en'] { opacity: 1; }
+.btn-lang:hover .lang-opt { opacity: 1; }
+
+/* Botón de idioma siempre visible en celular (junto al menú) */
+.btn-lang-mobile {
+    display: none; align-items: center; gap: 0.15rem; margin-left: auto;
+    background: var(--accent); color: #fff; border: none; border-radius: 999px;
+    padding: 0.45rem 0.8rem; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+}
 
 .menu-toggle { display: none; background: transparent; border: none; color: var(--heading); font-size: 1.5rem; cursor: pointer; padding: 0.25rem 0.5rem; }
 
@@ -538,6 +539,8 @@ h2::after {
     :root { --header-h: 64px; }
     .nav-container { padding: 1rem; }
     .menu-toggle { display: block; }
+    .btn-lang-mobile { display: inline-flex; }
+    .navbar .btn-lang { display: none; }
 
     .navbar {
         display: none; flex-direction: column; align-items: stretch; gap: 0;

@@ -62,11 +62,14 @@
   // ---------- idioma ----------
   function render() { window.CVRender.renderAll(data); }
 
-  document.getElementById('btn-lang').addEventListener('click', () => {
-    window.I18n.toggle();
-    render();
-    paintThemeButton();
-    setMenu(false);
+  ['btn-lang', 'btn-lang-mobile'].forEach((id) => {
+    const b = document.getElementById(id);
+    if (b) b.addEventListener('click', () => {
+      window.I18n.toggle();
+      render();
+      paintThemeButton();
+      setMenu(false);
+    });
   });
 
   // ---------- foto: si no carga, se muestran iniciales ----------
@@ -134,9 +137,9 @@
 
   // ---------- tema claro / oscuro ----------
   const themeBtn = document.getElementById('btn-theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   function currentTheme() {
-    return document.documentElement.dataset.theme || (prefersDark.matches ? 'dark' : 'light');
+    // Por defecto oscuro (como el diseño original); claro solo si el visitante lo elige
+    return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
   }
   function paintThemeButton() {
     if (!themeBtn) return;
@@ -160,7 +163,6 @@
         document.startViewTransition(apply);
       } else apply();
     });
-    prefersDark.addEventListener('change', paintThemeButton);
   }
 
   // ---------- barra de progreso de lectura y botón "volver arriba" ----------

@@ -47,8 +47,10 @@
       el.setAttribute('aria-label', t(el.dataset.i18nAria));
       el.setAttribute('title', t(el.dataset.i18nAria));
     });
-    const langBtn = $('#btn-lang');
-    if (langBtn) langBtn.setAttribute('aria-label', t('btnLangAria'));
+    ['#btn-lang', '#btn-lang-mobile'].forEach((sel) => {
+      const b = $(sel);
+      if (b) { b.setAttribute('aria-label', t('btnLangAria')); b.setAttribute('title', t('btnLangAria')); }
+    });
     const toggle = $('#menu-toggle');
     if (toggle) {
       const open = toggle.getAttribute('aria-expanded') === 'true';
